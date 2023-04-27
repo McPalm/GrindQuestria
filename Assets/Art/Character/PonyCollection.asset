@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00af100ba90f3ad499db2349846a85c0, type: 3}
+  m_Name: PonyCollection
+  m_EditorClassIdentifier: 
+  BodyTypes:
+  - {fileID: 2908625638737335105, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -2391481384661871862, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 3973933647655803777, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 614054776241813996, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -7230284335856105130, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  maneOffsets:
+  - {x: -1, y: 11}
+  - {x: -1, y: 9}
+  - {x: -1, y: 13}
+  - {x: -2, y: 11}
+  - {x: -1, y: 11}
+  tailOffsets:
+  - {x: 5, y: 7}
+  - {x: 4, y: 6}
+  - {x: 3, y: 8}
+  - {x: 5, y: 7}
+  - {x: 4, y: 7}
+  ManeTypes:
+  - {fileID: 6829552962827907678, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -4108310688953188306, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -5500227755136854167, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -5192851676363712278, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -7102861623586147947, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  TailTypes:
+  - {fileID: -6155928931861718264, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 7173460834887482038, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 7487582050652644525, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 3902175401232302895, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 3929796724204488348, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  EyeTypes:
+  - {fileID: 5613802740246858484, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -7908359208127360021, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 8201306870598886722, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}

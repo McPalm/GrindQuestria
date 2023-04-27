@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Enviroment
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 3b886de5050b0374b975aff4433ef2c2, type: 3}
+    - {fileID: 102900000, guid: 39aadec46f861294d996d0fa16149d39, type: 3}
+    - {fileID: 102900000, guid: 541a9cdacbfb1c2499dd9bd0ae4ddf5b, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 8033092973025764044, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
+  - {fileID: -5779282676337348671, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: -6337999885091750218, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: 4519664136019108208, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: 8074338581418846440, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: -1238933728272178944, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: 7642980859614939925, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: -174804484191063705, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: 3275407576765064038, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: -7067808830664889489, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: 3973933647655803777, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 614054776241813996, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 2908625638737335105, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -2391481384661871862, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -4108310688953188306, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -5500227755136854167, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -7230284335856105130, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 6829552962827907678, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -6155928931861718264, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 7173460834887482038, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -5192851676363712278, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 7487582050652644525, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 3902175401232302895, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -7102861623586147947, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 5613802740246858484, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 3929796724204488348, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: 8201306870598886722, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  - {fileID: -7908359208127360021, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Items_0
+  - Terrain_3
+  - Terrain_2
+  - Terrain_1
+  - Terrain_0
+  - Terrain_4
+  - Objects_0
+  - Objects_1
+  - Objects_2
+  - Objects_3
+  - Pony_2
+  - Pony_3
+  - Pony_0
+  - Pony_1
+  - Pony_6
+  - Pony_7
+  - Pony_4
+  - Pony_5
+  - Pony_8
+  - Pony_9
+  - Pony_11
+  - Pony_10
+  - Pony_13
+  - Pony_12
+  - Pony_15
+  - Pony_14
+  - Pony_17
+  - Pony_16
+  m_RenderDataMap: {}
+  m_Tag: Enviroment
+  m_IsVariant: 0
