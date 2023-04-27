@@ -11,15 +11,18 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < 16; i++)
+        if (target)
         {
-            int qty = target.GetStackSize(i);
-            Item item = target.GetItem(i);
-            transform.GetChild(i).gameObject.SetActive(target.GetStackSize(i) > 0);
-            if(qty > 0)
+            for (int i = 0; i < 16; i++)
             {
-                transform.GetChild(i).GetComponent<Image>().sprite = item.sprite;
-                transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = $"x{qty}";
+                int qty = target.GetStackSize(i);
+                Item item = target.GetItem(i);
+                transform.GetChild(i).gameObject.SetActive(target.GetStackSize(i) > 0);
+                if (qty > 0)
+                {
+                    transform.GetChild(i).GetComponent<Image>().sprite = item.sprite;
+                    transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = $"x{qty}";
+                }
             }
         }
     }

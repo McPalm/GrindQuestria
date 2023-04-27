@@ -289,8 +289,8 @@ MonoBehaviour:
   ParticleSystem: {fileID: 4399900293923396640}
   isChopped: 0
   reward: {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
-  rewardLow: 3
-  rewardHigh: 6
+  rewardLow: 1
+  rewardHigh: 2
 --- !u!61 &1779555743909028620
 BoxCollider2D:
   m_ObjectHideFlags: 0

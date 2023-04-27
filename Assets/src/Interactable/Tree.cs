@@ -11,7 +11,7 @@ public class Tree : MonoBehaviour, IInteractable
     public bool isChopped;
 
     public float MinimumDistance => 1f;
-    public float TimeToComplete => 1f;
+    public float TimeToComplete => 7f;
     public bool ValidTarget => isChopped == false;
 
 

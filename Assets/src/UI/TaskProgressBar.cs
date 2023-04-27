@@ -10,7 +10,10 @@ public class TaskProgressBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bar.gameObject.SetActive(Target.Busy);
-        bar.SetProgress(Target.Progress);
+        if (Target)
+        {
+            bar.gameObject.SetActive(Target.Busy);
+            bar.SetProgress(Target.Progress);
+        }
     }
 }

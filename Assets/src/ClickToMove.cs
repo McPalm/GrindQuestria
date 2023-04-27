@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class ClickToMove : MonoBehaviour
 {
-    public Vector2 goal;
     public LayerMask InteractionLayer;
-
-    void Start()
-    {
-        goal = transform.position;
-    }
 
     // Update is called once per frame
     void Update()
@@ -21,7 +15,7 @@ public class ClickToMove : MonoBehaviour
             var clickedInteractable = Physics2D.Raycast(clickPos, Vector2.zero, 0f, InteractionLayer);
             if (clickedInteractable)
             {
-                GetComponent<DoThing>().DoThingImmediately(new DoThing.ThingToDo()
+                GetComponent<NetInput>().DoThing(new DoThing.ThingToDo()
                 {
                     what = DoThing.Things.interact,
                     who = clickedInteractable.transform.gameObject,
@@ -30,12 +24,11 @@ public class ClickToMove : MonoBehaviour
 
             }
             else
-                GetComponent<DoThing>().DoThingImmediately(new DoThing.ThingToDo()
+                GetComponent<NetInput>().DoThing(new DoThing.ThingToDo()
                 {
                     what = DoThing.Things.walkhere,
                     where = clickPos,
                 });
         }
-        
     }
 }
