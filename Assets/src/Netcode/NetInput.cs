@@ -8,7 +8,7 @@ public class NetInput : NetworkBehaviour
     public GameObject PlayerObject;
 
     [SyncVar]
-    GameObject Character;
+    public GameObject MyCharacter;
 
     IEnumerator Start()
     {
@@ -17,12 +17,12 @@ public class NetInput : NetworkBehaviour
             var player = Instantiate(PlayerObject);
             var netID = player.GetComponent<NetworkIdentity>();
             NetworkServer.Spawn(player);
-            Character = player;
+            MyCharacter = player;
             player.GetComponent<Movement>().enabled = true;
         }
         if(isLocalPlayer)
         {
-            while (Character == null)
+            while (MyCharacter == null)
                 yield return null;
             InitLocal();
         }
@@ -31,16 +31,15 @@ public class NetInput : NetworkBehaviour
     /// <summary> Hook up UI and controls. </summary>
     void InitLocal()
     {
-        FindObjectOfType<TaskProgressBar>().Target = Character.GetComponent<Interactor>();
-        FindObjectOfType<InventoryUI>().target = Character.GetComponent<Inventory>();
-        FindObjectOfType<CameraFollow>().follow = Character.transform;
+        FindObjectOfType<TaskProgressBar>().Target = MyCharacter.GetComponent<Interactor>();
+        FindObjectOfType<InventoryUI>().target = MyCharacter.GetComponent<Inventory>();
+        FindObjectOfType<CameraFollow>().follow = MyCharacter.transform;
         GetComponent<ClickToMove>().enabled = true;
     }
 
     [Command]
     public void DoThing(DoThing.ThingToDo thing)
     {
-        Character.GetComponent<DoThing>().DoThingImmediately(thing);
+        MyCharacter.GetComponent<DoThing>().DoThingImmediately(thing);
     }
-
 }

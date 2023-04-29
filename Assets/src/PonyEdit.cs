@@ -16,7 +16,7 @@ public class PonyEdit : MonoBehaviour
         }
         else
             Model.SetApperance(savedApperance);
-        firstTime = true;
+        firstTime = false;
     }
 
     public PonyGen Model;
