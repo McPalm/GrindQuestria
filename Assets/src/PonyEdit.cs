@@ -11,7 +11,11 @@ public class PonyEdit : MonoBehaviour
     {
         if(firstTime)
         {
-            Model.Generate();
+            var json = PlayerPrefs.GetString("Apperance", "");
+            if (json == "")
+                Model.Generate();
+            else
+                Model.SetApperance(JsonUtility.FromJson<PonyGen.SerializedApperance>(json));
             savedApperance = Model.GetApperance();
         }
         else
@@ -26,8 +30,7 @@ public class PonyEdit : MonoBehaviour
         if(parsed != Color.clear)
         {
             Model.ManeColor = parsed;
-            Model.Apply();
-            savedApperance = Model.GetApperance();
+            ApplyAndSave();
         };
         
     }
@@ -37,8 +40,7 @@ public class PonyEdit : MonoBehaviour
         if (parsed != Color.clear)
         {
             Model.BodyColor = parsed;
-            Model.Apply();
-            savedApperance = Model.GetApperance();
+            ApplyAndSave();
         };
 
     }
@@ -48,8 +50,7 @@ public class PonyEdit : MonoBehaviour
         if (parsed != Color.clear)
         {
             Model.TailColor = parsed;
-            Model.Apply();
-            savedApperance = Model.GetApperance();
+            ApplyAndSave();
         };
 
     }
@@ -57,26 +58,29 @@ public class PonyEdit : MonoBehaviour
     public void NextMane()
     {
         Model.ManeType++;
-        Model.Apply();
-        savedApperance = Model.GetApperance();
+        ApplyAndSave();
     }
     public void NextEye()
     {
         Model.EyeType++;
-        Model.Apply();
-        savedApperance = Model.GetApperance();
+        ApplyAndSave();
     }
     public void NextBody()
     {
         Model.BodyType++;
-        Model.Apply();
-        savedApperance = Model.GetApperance();
+        ApplyAndSave();
     }
     public void NextTail()
     {
         Model.TailType++;
+        ApplyAndSave();
+    }
+
+    void ApplyAndSave()
+    {
         Model.Apply();
         savedApperance = Model.GetApperance();
+        PlayerPrefs.SetString("Apperance", JsonUtility.ToJson(savedApperance));
     }
 
     Color Parse(string color)
