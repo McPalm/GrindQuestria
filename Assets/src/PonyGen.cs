@@ -43,8 +43,13 @@ public class PonyGen : MonoBehaviour
         Apply();
     }
 
-    void Apply()
+    public void Apply()
     {
+        BodyType %= PonyCollection.BodyTypes.Length;
+        ManeType %= PonyCollection.ManeTypes.Length;
+        TailType %= PonyCollection.TailTypes.Length;
+        EyeType %= PonyCollection.EyeTypes.Length;
+
         Body.color = BodyColor;
         Mane.color = ManeColor;
         Tail.color = TailColor;
