@@ -15,7 +15,6 @@ public class NetInput : NetworkBehaviour
         if (isServer)
         {
             var player = Instantiate(PlayerObject);
-            var netID = player.GetComponent<NetworkIdentity>();
             NetworkServer.Spawn(player);
             MyCharacter = player;
             player.GetComponent<Movement>().enabled = true;

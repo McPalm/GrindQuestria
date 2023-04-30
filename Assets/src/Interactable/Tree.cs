@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Tree : MonoBehaviour, IInteractable
+public class Tree : NetworkBehaviour, IInteractable
 {
     public SpriteRenderer Trunk;
     public SpriteRenderer[] Leaves;
