@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Inventory : MonoBehaviour
+public class Inventory : NetworkBehaviour
 {
     Item[] items;
     int[] stacksizes;
@@ -86,5 +87,21 @@ public class Inventory : MonoBehaviour
             };
         }
         return removed;
+    }
+
+    void SendAllItems()
+    {
+        string[] names = new string[items.Length];
+        for (int i = 0; i < names.Length; i++)
+        {
+            names[i] = items[i].name;
+        }
+        SendAllItems(names, stacksizes);
+    }
+
+    [ClientRpc]
+    void SendAllItems(string[] items, int[] stackSizes)
+    {
+
     }
 }
