@@ -9,32 +9,47 @@ public class Tree : NetworkBehaviour, IInteractable
     public SpriteRenderer[] Leaves;
     public ParticleSystem ParticleSystem;
 
-    public bool isChopped;
+    [SyncVar(hook ="SetChop")]
+    public bool Alive;
 
     public float MinimumDistance => 1f;
     public float TimeToComplete => 7f;
-    public bool ValidTarget => isChopped == false;
+    public bool ValidTarget => Alive;
 
 
     public Item reward;
     public int rewardLow = 1;
     public int rewardHigh = 2;
 
+    void Start()
+    {
+        SetChop(false, Alive);
+    }
+
+    void SetChop(bool oldValue, bool alive)
+    {
+        Trunk.enabled = alive;
+        GetComponent<BoxCollider2D>().enabled = alive;
+        foreach (var leaf in Leaves)
+            leaf.enabled = alive;
+    }
 
     void GetChopped(GameObject user)
     {
-        Trunk.enabled = false;
-        foreach (var leaf in Leaves)
-            leaf.enabled = false;
-        ParticleSystem.Play();
-        isChopped = true;
-        GetComponent<BoxCollider2D>().enabled = false;
+        Alive = false;
+        ChopEffects();
         user.GetComponent<Inventory>().AddItem(reward, Random.Range(rewardLow, rewardHigh+1));
+    }
+
+    [ClientRpc]
+    void ChopEffects()
+    {
+        ParticleSystem.Play();
     }
 
     public void Interact(GameObject user, Vector3 worldPosition)
     {
-        if(!isChopped)
+        if(Alive)
             GetChopped(user);
     }
 

@@ -9,7 +9,7 @@ public class ClickToMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             var clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var clickedInteractable = Physics2D.Raycast(clickPos, Vector2.zero, 0f, InteractionLayer);
@@ -24,11 +24,13 @@ public class ClickToMove : MonoBehaviour
 
             }
             else
+            {
                 GetComponent<NetInput>().DoThing(new DoThing.ThingToDo()
                 {
                     what = DoThing.Things.walkhere,
                     where = clickPos,
                 });
+            }
         }
     }
 }

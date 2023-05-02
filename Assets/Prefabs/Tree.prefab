@@ -291,7 +291,7 @@ MonoBehaviour:
   - {fileID: 6648048425809971905}
   - {fileID: 4116055186845159582}
   ParticleSystem: {fileID: 4399900293923396640}
-  isChopped: 0
+  Alive: 1
   reward: {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
   rewardLow: 1
   rewardHigh: 2
