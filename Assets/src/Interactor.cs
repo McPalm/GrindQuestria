@@ -1,30 +1,35 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactor : MonoBehaviour
+public class Interactor : NetworkBehaviour
 {
-    public bool Busy => target != null;
+    [SyncVar]
+    public bool Busy;
     IInteractable target;
-    float startTime;
-    float endTime;
+    [SyncVar]
+    double startTime;
+    [SyncVar]
+    double endTime;
     Vector3 where;
 
-
-    public float Progress => (Time.timeSinceLevelLoad - startTime) / (endTime - startTime);
+    public float Progress => (float)((NetworkTime.time - startTime) / (endTime - startTime));
 
     public void InteractWith(IInteractable target, Vector3 worldPosition)
     {
         if (target.ValidTarget)
         {
-            startTime = Time.timeSinceLevelLoad;
-            endTime = Time.timeSinceLevelLoad + target.TimeToComplete;
+            startTime = NetworkTime.time;
+            endTime = NetworkTime.time + target.TimeToComplete;
             this.target = target;
+            Busy = true;
             GetComponent<Animator>().SetBool("Working", true);
             where = worldPosition;
         }
     }
 
+    [Server]
     void FixedUpdate()
     {
         if(Busy && Time.timeSinceLevelLoad > endTime)
@@ -41,12 +46,13 @@ public class Interactor : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("Working", false);
         target = null;
+        Busy = false;
     }
 
     void CompleteTask()
     {
         GetComponent<Animator>().SetBool("Working", false);
         target.Interact(gameObject, where);
-        target = null;
+        Busy = false;
     }
 }
