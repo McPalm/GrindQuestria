@@ -1413,6 +1413,8 @@ GameObject:
   - component: {fileID: 503898245}
   - component: {fileID: 503898247}
   - component: {fileID: 503898246}
+  - component: {fileID: 503898249}
+  - component: {fileID: 503898248}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -10802,6 +10804,38 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &503898248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503898244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5dba5c30fce314f92ca871232322a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+--- !u!114 &503898249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503898244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3614177080
+  _assetId: 0
+  serverOnly: 0
+  visible: 0
+  hasSpawned: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -13106,6 +13140,8 @@ GameObject:
   - component: {fileID: 1789106126}
   - component: {fileID: 1789106128}
   - component: {fileID: 1789106129}
+  - component: {fileID: 1789106130}
+  - component: {fileID: 1789106131}
   m_Layer: 6
   m_Name: Blueprint
   m_TagString: Untagged
@@ -13425,7 +13461,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06dda0d39c2edc24ba95df3b4061875d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 1789106127}
+  tilemap: {fileID: 1789106131}
+--- !u!114 &1789106130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789106124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2857968466
+  _assetId: 0
+  serverOnly: 0
+  visible: 0
+  hasSpawned: 0
+--- !u!114 &1789106131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789106124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5dba5c30fce314f92ca871232322a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &1790867973
 GameObject:
   m_ObjectHideFlags: 0
@@ -13514,6 +13582,8 @@ GameObject:
   - component: {fileID: 1830415040}
   - component: {fileID: 1830415039}
   - component: {fileID: 1830415038}
+  - component: {fileID: 1830415042}
+  - component: {fileID: 1830415041}
   m_Layer: 7
   m_Name: Walls
   m_TagString: Untagged
@@ -13839,6 +13909,38 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1830415041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830415036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5dba5c30fce314f92ca871232322a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+--- !u!114 &1830415042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830415036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3327841106
+  _assetId: 0
+  serverOnly: 0
+  visible: 0
+  hasSpawned: 0
 --- !u!1 &1877084213
 GameObject:
   m_ObjectHideFlags: 0
@@ -14261,9 +14363,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3da58fa0caa1f45a35d2a79daff310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ground: {fileID: 503898247}
-  Walls: {fileID: 1830415040}
-  Blueprint: {fileID: 1789106127}
+  Ground: {fileID: 503898248}
+  Walls: {fileID: 1830415041}
+  Blueprint: {fileID: 1789106131}
 --- !u!114 &2115559144
 MonoBehaviour:
   m_ObjectHideFlags: 0

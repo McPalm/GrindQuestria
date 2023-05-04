@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Blueprint : MonoBehaviour, IInteractable
 {
-    public Tilemap tilemap;
+    public NetTilemap tilemap;
 
     public bool ValidTarget => true;
     public float MinimumDistance => 1f;

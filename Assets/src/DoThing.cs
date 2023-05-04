@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class DoThing : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class DoThing : MonoBehaviour
     Interactor interactor;
     Movement movement;
     Pathfinder pathfinder;
-    Tilemap walls;
+    NetTilemap walls;
     LayerMask wallMask;
 
     List<ThingToDo> ThingsImDoing = new List<ThingToDo>();
@@ -65,8 +64,6 @@ public class DoThing : MonoBehaviour
                         currentNode = 0;
                         if(Path == null)
                             ThingsImDoing.RemoveAt(0);
-                        else
-                            Debug.Log($"Made path with {Path.Count} nodes");
                         break;
                     }
                     // see if we can skip a node due to having a clear path to the next
@@ -80,6 +77,7 @@ public class DoThing : MonoBehaviour
                     {
                         Path = null;
                         ThingsImDoing.RemoveAt(0);
+                        break;
                     }
                     // go to the next node in the path
                     delta = (Vector2)walls.CellToWorld(Path[currentNode]) + new Vector2(.5f, .5f) - (Vector2)transform.position;

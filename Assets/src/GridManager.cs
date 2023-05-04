@@ -6,16 +6,16 @@ using UnityEngine.Tilemaps;
 public class GridManager : MonoBehaviour
 {
     static public GridManager instance;
-    public Tilemap Ground;
-    public Tilemap Walls;
-    public Tilemap Blueprint;
+    public NetTilemap Ground;
+    public NetTilemap Walls;
+    public NetTilemap Blueprint;
 
     void Awake()
     {
         instance = this;
     }
 
-    static public Tilemap GetLayer(TileLayer tileLayer)
+    static public NetTilemap GetLayer(TileLayer tileLayer)
     {
         switch (tileLayer)
             {
