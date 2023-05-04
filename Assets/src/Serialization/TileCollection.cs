@@ -1,9 +1,11 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-// [CreateAssetMenu]
-public class ItemCollection : ScriptableObjectCollection<Item>
+//[CreateAssetMenu]
+public class TileCollection : ScriptableObjectCollection<TileBase>
 {
     static ItemCollection instance;
     public static ItemCollection Instance
