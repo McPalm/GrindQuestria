@@ -32,7 +32,7 @@ public class Interactor : NetworkBehaviour
     [Server]
     void FixedUpdate()
     {
-        if(Busy && Time.timeSinceLevelLoad > endTime)
+        if(Busy && NetworkTime.time > endTime)
         {
             CompleteTask();
         }
