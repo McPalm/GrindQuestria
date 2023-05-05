@@ -5,18 +5,21 @@ using Mirror;
 
 public class Inventory : NetworkBehaviour
 {
+    const int SLOTS = 16;
+
     Item[] items;
-    int[] stacksizes;
+    int[] stackSizes;
 
     public Item GetItem(int index) => items[index];
-    public int GetStackSize(int index) => stacksizes[index];
+    public int GetStackSize(int index) => stackSizes[index];
 
     void Awake()
     {
-        items = new Item[16];
-        stacksizes = new int[16];
+        items = new Item[SLOTS];
+        stackSizes = new int[SLOTS];
     }
 
+    [Server]
     /// <returns>Number of items failed to go to inventory</returns>
     public int AddItem(Item item, int qty = 1)
     {
@@ -26,82 +29,86 @@ public class Inventory : NetworkBehaviour
         if (index == -1)
             return qty;
         items[index] = item;
-        int add = Mathf.Min(qty, item.stackSize - stacksizes[index]);
-        stacksizes[index] += add;
+        int add = Mathf.Min(qty, item.stackSize - stackSizes[index]);
+        stackSizes[index] += add;
         qty -= add;
-
+        SendAllItems();
         if (qty > 0)
             return AddItem(item, qty);
         return qty;
     }
-
     public bool HasItem(Item item) => FirstIndexOf(item) > -1;
     public int NumberOfItem(Item item)
     {
         int qty = 0;
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < SLOTS; i++)
         {
             if (items[i] == item)
-                qty += stacksizes[i];
+                qty += stackSizes[i];
         }
         return qty;
     }
     public int FirstIndexOf(Item item)
     {
-        for(int i = 0; i < 16; i++)
+        for(int i = 0; i < SLOTS; i++)
         {
-            if (items[i] == item && stacksizes[i] > 0)
+            if (items[i] == item && stackSizes[i] > 0)
                 return i;
         }
         return -1;
     }
     public int FirstNonFullStack(Item item)
     {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < SLOTS; i++)
         {
-            if (items[i] == item && stacksizes[i] < item.stackSize)
+            if (items[i] == item && stackSizes[i] < item.stackSize)
                 return i;
         }
         return -1;
     }
     public int FirstEmptyIndex()
     {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < SLOTS; i++)
         {
-            if (stacksizes[i] == 0)
+            if (stackSizes[i] == 0)
                 return i;
         }
         return -1;
     }
-
+    [Server]
     public int RemoveItem(Item item, int qty)
     {
         int removed = 0;
-        for (int i = 15; i >= 0 && removed < qty; i--)
+        for (int i = SLOTS-1; i >= 0 && removed < qty; i--)
         {
             if(items[i] == item)
             {
-                int remove = Mathf.Min(qty - removed, stacksizes[i]);
+                int remove = Mathf.Min(qty - removed, stackSizes[i]);
                 removed += remove;
-                stacksizes[i] -= removed;
+                stackSizes[i] -= removed;
             };
         }
+        SendAllItems();
         return removed;
     }
 
     void SendAllItems()
     {
-        string[] names = new string[items.Length];
-        for (int i = 0; i < names.Length; i++)
+        int[] indexes = new int[SLOTS];
+        for (int i = 0; i < SLOTS; i++)
         {
-            names[i] = items[i].name;
+            indexes[i] = ItemCollection.Instance.IndexOf(items[i]);
         }
-        SendAllItems(names, stacksizes);
+        SendAllItems(indexes, stackSizes);
     }
 
     [ClientRpc]
-    void SendAllItems(string[] items, int[] stackSizes)
+    void SendAllItems(int[] itemIndexes, int[] stackSizes)
     {
-
+        for (int i = 0; i < SLOTS; i++)
+        {
+            items[i] = ItemCollection.Instance.GetItem(itemIndexes[i]);
+        }
+        this.stackSizes = stackSizes;
     }
 }

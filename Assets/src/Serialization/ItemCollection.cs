@@ -17,4 +17,7 @@ public class ItemCollection : ScriptableObjectCollection<Item>
             return instance;
         }
     }
+
+    public int IndexOf(Item item) => item == null ? -1 : List.IndexOf(item);
+    public Item GetItem(int index) => index == -1 ? null : List[index];
 }

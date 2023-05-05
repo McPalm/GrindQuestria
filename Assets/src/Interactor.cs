@@ -29,16 +29,19 @@ public class Interactor : NetworkBehaviour
         }
     }
 
-    [Server]
     void FixedUpdate()
     {
-        if(Busy && NetworkTime.time > endTime)
+        if (isServer)
         {
-            CompleteTask();
-        }
-        if(Busy && !target.ValidTarget)
-        {
-            Cancel();
+
+            if (Busy && NetworkTime.time > endTime)
+            {
+                CompleteTask();
+            }
+            if (Busy && !target.ValidTarget)
+            {
+                Cancel();
+            }
         }
     }
 

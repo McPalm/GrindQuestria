@@ -18,10 +18,4 @@ public class ScatterObjects : MonoBehaviour
             NetworkServer.Spawn(fab);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
