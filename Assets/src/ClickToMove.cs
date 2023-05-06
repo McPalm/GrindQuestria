@@ -5,6 +5,7 @@ using UnityEngine;
 public class ClickToMove : MonoBehaviour
 {
     public LayerMask InteractionLayer;
+    public NetInput netInput;
 
     // Update is called once per frame
     void Update()
@@ -15,7 +16,7 @@ public class ClickToMove : MonoBehaviour
             var clickedInteractable = Physics2D.Raycast(clickPos, Vector2.zero, 0f, InteractionLayer);
             if (clickedInteractable)
             {
-                GetComponent<NetInput>().DoThing(new DoThing.ThingToDo()
+                netInput.DoThing(new DoThing.ThingToDo()
                 {
                     what = DoThing.Things.interact,
                     who = clickedInteractable.transform.gameObject,
@@ -25,7 +26,7 @@ public class ClickToMove : MonoBehaviour
             }
             else
             {
-                GetComponent<NetInput>().DoThing(new DoThing.ThingToDo()
+                netInput.DoThing(new DoThing.ThingToDo()
                 {
                     what = DoThing.Things.walkhere,
                     where = clickPos,

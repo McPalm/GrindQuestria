@@ -15,8 +15,12 @@ public class NetTilemap : NetworkBehaviour
         tilemap = GetComponent<Tilemap>();
     }
 
+    public void SetTile(Vector3 worldPosition, TileBase tile) => SetTile(tilemap.WorldToCell(worldPosition), tile);
     public void SetTile(Vector3Int position, TileBase tile)
     {
+#if UNITY_SERVER
+        tilemap.SetTile(change.position, change.Tile);
+#endif
         ChangeTile(SerializedSyncTile.Create(position, tile));
     }
 
@@ -56,5 +60,6 @@ public class NetTilemap : NetworkBehaviour
     public Vector3Int WorldToCell(Vector3 worldPosition) => tilemap.WorldToCell(worldPosition);
     public Vector3 CellToWorld(Vector3Int cellPosition) => tilemap.CellToWorld(cellPosition);
     public TileBase GetTile(Vector3Int cellPosition) => tilemap.GetTile(cellPosition);
+    public TileBase GetTile(Vector3 worldPosition) => GetTile(WorldToCell(worldPosition));
 }
 ;

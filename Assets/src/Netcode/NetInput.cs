@@ -33,12 +33,19 @@ public class NetInput : NetworkBehaviour
         FindObjectOfType<TaskProgressBar>().Target = MyCharacter.GetComponent<Interactor>();
         FindObjectOfType<InventoryUI>().target = MyCharacter.GetComponent<Inventory>();
         FindObjectOfType<CameraFollow>().follow = MyCharacter.transform;
-        GetComponent<ClickToMove>().enabled = true;
+        FindObjectOfType<ClickToMove>().netInput = this;
+        FindObjectOfType<BlueprintEditor>(includeInactive: true).NetInput = this;
     }
 
     [Command]
     public void DoThing(DoThing.ThingToDo thing)
     {
         MyCharacter.GetComponent<DoThing>().DoThingImmediately(thing);
+    }
+    [Command]
+    public void SetBlueprint(Vector3Int position, int tileIndex)
+    {
+        var tile = TileCollection.Instance.GetTile(tileIndex);
+        GridManager.instance.Blueprint.SetTile(position, tile);
     }
 }
