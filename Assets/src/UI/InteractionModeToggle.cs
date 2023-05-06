@@ -24,6 +24,8 @@ public class InteractionModeToggle : MonoBehaviour
             SetMode(InteractionModes.blueprint);
     }
 
+    public void EnterBuildMode() => SetMode(InteractionModes.build);
+    public void EnterBlueprintMode() => SetMode(InteractionModes.blueprint);
     public void SetMode(InteractionModes mode)
     {
         DisableAll();
@@ -57,6 +59,7 @@ public class InteractionModeToggle : MonoBehaviour
             b.enabled = false;
     }
 
+    [System.Serializable]
     public enum InteractionModes
     {
         build,

@@ -65,6 +65,7 @@ SpriteAtlas:
   - {fileID: -174804484191063705, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   - {fileID: 3275407576765064038, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   - {fileID: -7067808830664889489, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: 21300000, guid: 2e2e55870c38a584b9d3fd2d53036796, type: 3}
   - {fileID: 3973933647655803777, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
   - {fileID: 614054776241813996, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
   - {fileID: 2908625638737335105, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
@@ -98,6 +99,7 @@ SpriteAtlas:
   - Objects_1
   - Objects_2
   - Objects_3
+  - Box32
   - Pony_2
   - Pony_3
   - Pony_0
