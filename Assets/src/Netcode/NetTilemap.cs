@@ -13,6 +13,10 @@ public class NetTilemap : NetworkBehaviour
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
+        if(isClientOnly)
+        {
+            RequestTiles(Vector3Int.zero);
+        }
     }
 
     public void SetTile(Vector3 worldPosition, TileBase tile) => SetTile(tilemap.WorldToCell(worldPosition), tile);
@@ -24,12 +28,27 @@ public class NetTilemap : NetworkBehaviour
         ChangeTile(SerializedSyncTile.Create(position, tile));
     }
 
-    [ClientRpc]
-    void ChangeTiles(SerializedSyncTile[] changes)
+    [Command(requiresAuthority =false)]
+    void RequestTiles(Vector3Int center, NetworkConnectionToClient sender = null)
     {
-        foreach(var change in changes)
+        var area = new BoundsInt(center - new Vector3Int(10, 10, 0), new Vector3Int(20, 20, 1));
+        var tiles = tilemap.GetTilesBlock(area);
+        int[] tileIndexes = new int[tiles.Length];
+        for (int i = 0; i < tileIndexes.Length; i++)
         {
-            tilemap.SetTile(change.position, change.Tile);
+            tileIndexes[i] = TileCollection.Instance.IndexOf(tiles[i]);
+        }
+        ChangeTiles(sender, center, tileIndexes);
+    }
+
+    [TargetRpc]
+    void ChangeTiles(NetworkConnection connectionToClient, Vector3Int center, int[] tiles)
+    {
+        var area = new BoundsInt(center - new Vector3Int(10, 10, 0), new Vector3Int(20, 20, 1));
+        int i = 0;
+        foreach(var position in area.allPositionsWithin)
+        {
+            tilemap.SetTile(position, TileCollection.Instance.GetTile(tiles[i++]));
         }
     }
 
