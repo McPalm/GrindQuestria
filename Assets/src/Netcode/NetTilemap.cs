@@ -10,12 +10,22 @@ public class NetTilemap : NetworkBehaviour
 {
     Tilemap tilemap;
 
-    void Start()
+    Tilemap Tilemap { get
+        {
+            /*
+            if (tilemap == null)
+                tilemap = GetComponent<Tilemap>();
+            */
+            return tilemap;
+        }
+    }
+
+    private void Awake()
     {
         tilemap = GetComponent<Tilemap>();
     }
 
-    public void SetTile(Vector3 worldPosition, TileBase tile) => SetTile(tilemap.WorldToCell(worldPosition), tile);
+    public void SetTile(Vector3 worldPosition, TileBase tile) => SetTile(Tilemap.WorldToCell(worldPosition), tile);
     public void SetTile(Vector3Int position, TileBase tile)
     {
 #if UNITY_SERVER
@@ -31,7 +41,7 @@ public class NetTilemap : NetworkBehaviour
     public void SendTileRequest(Vector3Int center, NetworkConnectionToClient destination)
     {
         var area = GetBoundsAround(center);
-        var tiles = tilemap.GetTilesBlock(area);
+        var tiles = Tilemap.GetTilesBlock(area);
         int[] tileIndexes = new int[tiles.Length];
         for (int i = 0; i < tileIndexes.Length; i++)
         {
@@ -47,14 +57,14 @@ public class NetTilemap : NetworkBehaviour
         int i = 0;
         foreach(var position in area.allPositionsWithin)
         {
-            tilemap.SetTile(position, TileCollection.Instance.GetTile(tiles[i++]));
+            Tilemap.SetTile(position, TileCollection.Instance.GetTile(tiles[i++]));
         }
     }
 
     [ClientRpc]
     void ChangeTile(SerializedSyncTile change)
     {
-        tilemap.SetTile(change.position, change.Tile);
+        Tilemap.SetTile(change.position, change.Tile);
     }
 
     [System.Serializable]
@@ -75,9 +85,9 @@ public class NetTilemap : NetworkBehaviour
         public TileBase Tile => TileCollection.Instance.GetTile(tileIndex);
     }
 
-    public Vector3Int WorldToCell(Vector3 worldPosition) => tilemap.WorldToCell(worldPosition);
-    public Vector3 CellToWorld(Vector3Int cellPosition) => tilemap.CellToWorld(cellPosition);
-    public TileBase GetTile(Vector3Int cellPosition) => tilemap.GetTile(cellPosition);
+    public Vector3Int WorldToCell(Vector3 worldPosition) => Tilemap.WorldToCell(worldPosition);
+    public Vector3 CellToWorld(Vector3Int cellPosition) => Tilemap.CellToWorld(cellPosition);
+    public TileBase GetTile(Vector3Int cellPosition) => Tilemap.GetTile(cellPosition);
     public TileBase GetTile(Vector3 worldPosition) => GetTile(WorldToCell(worldPosition));
 
     BoundsInt GetBoundsAround(Vector3Int center) => new BoundsInt(center - new Vector3Int(20, 20, 0), new Vector3Int(40, 40, 1));
