@@ -5,8 +5,6 @@ using Mirror;
 
 public class NetInput : NetworkBehaviour
 {
-    public GameObject PlayerObject;
-
     [SyncVar]
     public GameObject MyCharacter;
 
@@ -14,8 +12,7 @@ public class NetInput : NetworkBehaviour
     {
         if (isServer)
         {
-            var player = Instantiate(PlayerObject);
-            NetworkServer.Spawn(player);
+            var player = CharacterRegistry.Instance.GetCharacter();
             MyCharacter = player;
             player.GetComponent<Movement>().enabled = true;
         }
@@ -35,6 +32,12 @@ public class NetInput : NetworkBehaviour
         FindObjectOfType<CameraFollow>().follow = MyCharacter.transform;
         FindObjectOfType<ClickToMove>().netInput = this;
         FindObjectOfType<BlueprintEditor>(includeInactive: true).NetInput = this;
+    }
+
+    private void OnDestroy()
+    {
+        if(isServer)
+            CharacterRegistry.Instance.YieldCharacter(MyCharacter);
     }
 
     [Command]
