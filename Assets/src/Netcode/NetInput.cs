@@ -14,7 +14,7 @@ public class NetInput : NetworkBehaviour
         {
             var player = CharacterRegistry.Instance.GetCharacter();
             MyCharacter = player;
-            player.GetComponent<Movement>().enabled = true;
+            player.GetComponent<DoThing>().enabled = true;
         }
         if(isLocalPlayer)
         {

@@ -1,13 +1,24 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Movement : NetworkBehaviour
 {
     public float walkSpeed = 1f;
     public float runSpeed = 3f;
     Vector2 direction;
-    public Vector2 Direction { set => direction = value.sqrMagnitude < 1f ? value : value.normalized; }
+    Vector3 position;
+    bool updatePosition = false;
+    double lastUpdate;
+    public Vector2 Direction
+    {
+        set
+        {
+            direction = value.sqrMagnitude < 1f ? value : value.normalized;
+            SetDirection(direction, transform.position, NetworkTime.time);
+        }
+    }
     public bool Running;
     Animator animator;
     Rigidbody2D body;
@@ -19,6 +30,22 @@ public class Movement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         body = GetComponent<Rigidbody2D>();
+        position = transform.position;
+    }
+
+    [ClientRpc(channel = Channels.Unreliable)]
+    void SetDirection(Vector2 direction, Vector3 position, double time)
+    {
+        if (isServer)
+            return;
+        Debug.Log("Recieved");
+        if (time > lastUpdate)
+        {
+            lastUpdate = time;
+            this.position = Vector3.Lerp(position, this.position, .2f);
+            updatePosition = true;
+            this.direction = direction;
+        }
     }
 
     IEnumerator Flip()
@@ -41,6 +68,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(isServer)
+            position = transform.position;
         if(direction != Vector2.zero)
         {
             if (Mathf.Sign(direction.x) != facing)
@@ -49,8 +78,12 @@ public class Movement : MonoBehaviour
                 StartCoroutine(Flip());
             };
         }
-        body.MovePosition(transform.position + (Vector3)direction * Time.fixedDeltaTime * (Running ? runSpeed : walkSpeed));
-        animator.SetBool("Walking", direction.sqrMagnitude > .1f);
-        animator.SetBool("Running", direction.sqrMagnitude > .1f && Running);
+        position += (Vector3)direction * Time.fixedDeltaTime * (Running ? runSpeed : walkSpeed);
+        body.MovePosition(position);
+        if (isServer)
+        {
+            animator.SetBool("Walking", direction.sqrMagnitude > .1f);
+            animator.SetBool("Running", direction.sqrMagnitude > .1f && Running);
+        }
     }
 }
