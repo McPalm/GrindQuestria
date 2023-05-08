@@ -13,10 +13,6 @@ public class NetTilemap : NetworkBehaviour
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
-        if(isClientOnly)
-        {
-            RequestTiles(Vector3Int.zero);
-        }
     }
 
     public void SetTile(Vector3 worldPosition, TileBase tile) => SetTile(tilemap.WorldToCell(worldPosition), tile);
@@ -29,22 +25,25 @@ public class NetTilemap : NetworkBehaviour
     }
 
     [Command(requiresAuthority =false)]
-    void RequestTiles(Vector3Int center, NetworkConnectionToClient sender = null)
+    void RequestTiles(Vector3Int center, NetworkConnectionToClient sender = null) => SendTileRequest(center, sender);
+
+    [Server]
+    public void SendTileRequest(Vector3Int center, NetworkConnectionToClient destination)
     {
-        var area = new BoundsInt(center - new Vector3Int(10, 10, 0), new Vector3Int(20, 20, 1));
+        var area = GetBoundsAround(center);
         var tiles = tilemap.GetTilesBlock(area);
         int[] tileIndexes = new int[tiles.Length];
         for (int i = 0; i < tileIndexes.Length; i++)
         {
             tileIndexes[i] = TileCollection.Instance.IndexOf(tiles[i]);
         }
-        ChangeTiles(sender, center, tileIndexes);
+        ChangeTiles(destination, center, tileIndexes);
     }
 
     [TargetRpc]
     void ChangeTiles(NetworkConnection connectionToClient, Vector3Int center, int[] tiles)
     {
-        var area = new BoundsInt(center - new Vector3Int(10, 10, 0), new Vector3Int(20, 20, 1));
+        var area = GetBoundsAround(center);
         int i = 0;
         foreach(var position in area.allPositionsWithin)
         {
@@ -80,5 +79,7 @@ public class NetTilemap : NetworkBehaviour
     public Vector3 CellToWorld(Vector3Int cellPosition) => tilemap.CellToWorld(cellPosition);
     public TileBase GetTile(Vector3Int cellPosition) => tilemap.GetTile(cellPosition);
     public TileBase GetTile(Vector3 worldPosition) => GetTile(WorldToCell(worldPosition));
+
+    BoundsInt GetBoundsAround(Vector3Int center) => new BoundsInt(center - new Vector3Int(20, 20, 0), new Vector3Int(40, 40, 1));
 }
 ;
