@@ -13,16 +13,15 @@ public class TilePerlinNoise : MonoBehaviour
     [Mirror.Server]
     void Start()
     {
-        float rx = Random.value * 10000f;
-        float ry = Random.value * 10000f;
+        long seed = Random.Range(0, 10000);
+        long seed2 = seed + Random.Range(100, 10000);
 
         for (int x = -size.x; x < size.x; x++)
         {
             for (int y = -size.y; y < size.y; y++)
             {
-                var localValue = .8f * Mathf.PerlinNoise(x * .2f + rx + y * .03f, y * .2f + ry + x * .03f) + Random.value * .25f;
-                int goodValue = Mathf.Clamp(Mathf.FloorToInt(localValue * Tiles.Length), 0, Tiles.Length - 1);
-                Tilemap.SetTile(new Vector3Int(x, y, 0),  Tiles[goodValue]);
+                var localValue = OpenSimplex2S.Noise2(seed, x * .15f, y *.15f) + OpenSimplex2S.Noise2(seed, x * .05f, y * .05f);
+                Tilemap.SetTile(new Vector3Int(x, y, 0), localValue < 0 ? Tiles[0] : Tiles[1]);
             }
         }
     }
