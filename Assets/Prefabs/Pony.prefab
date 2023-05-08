@@ -183,6 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5c62f0aa09b8e4eba34f89ef35ab89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  Busy: 0
 --- !u!114 &6814213073612090178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 805f3516eeb53654bacf4ca1d0d1b9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!58 &2023061806753821890
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -281,7 +288,7 @@ MonoBehaviour:
   syncPosition: 1
   syncRotation: 1
   syncScale: 1
-  interpolatePosition: 1
+  interpolatePosition: 0
   interpolateRotation: 0
   interpolateScale: 1
   showGizmos: 0
@@ -325,6 +332,20 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  apperance:
+    body: 0
+    mane: 0
+    tail: 0
+    eye: 0
+    body_r: 0
+    body_g: 0
+    body_b: 0
+    mane_r: 0
+    mane_g: 0
+    mane_b: 0
+    tail_r: 0
+    tail_g: 0
+    tail_b: 0
 --- !u!1 &4090559553729590636
 GameObject:
   m_ObjectHideFlags: 0
