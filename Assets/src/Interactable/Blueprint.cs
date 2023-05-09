@@ -31,7 +31,7 @@ public class Blueprint : MonoBehaviour, IInteractable
         // check if we are bulldozing
         if(building == null)
         {
-            GridManager.GetLayer(TileLayer.wall).SetTile(cellPos, null);
+            DemolishAndRefund(user, cellPos);
             tilemap.SetTile(cellPos, null);
             return;
         }
@@ -40,8 +40,26 @@ public class Blueprint : MonoBehaviour, IInteractable
         if (inventory.HasItem(building.materials[0]) == false)
             return;
         inventory.RemoveItem(building.materials[0], building.materialsQTY[0]);
-        // remove from blueprint and add to tilemap
+        // remove old wall if any
+        if (GridManager.GetLayer(building.tileLayer).GetTile(cellPos) != null)
+            DemolishAndRefund(user, cellPos);
+        // remove from blueprint and add to tilemap        
         GridManager.GetLayer(building.tileLayer).SetTile(cellPos, blueprintTile);
         tilemap.SetTile(cellPos, null);
+    }
+
+    public void DemolishAndRefund(GameObject user, Vector3Int position)
+    {
+        var tile = GridManager.instance.Walls.GetTile(position);
+        if(tile != null && tile is BuildingTile)
+        {
+            var bTile = tile as BuildingTile;
+            var inventory = user.GetComponent<Inventory>();
+            for(int i = 0; i < bTile.building.materials.Length; i++)
+            {
+                inventory.AddItem(bTile.building.materials[i], bTile.building.materialsQTY[i]);
+            }
+        }
+        GridManager.instance.Walls.SetTile(position, null);
     }
 }
