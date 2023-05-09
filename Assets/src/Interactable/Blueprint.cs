@@ -10,11 +10,6 @@ public class Blueprint : MonoBehaviour, IInteractable
     public float MinimumDistance => 1f;
     public float TimeToComplete => 5f;
 
-    public Vector2 GetInteractLocation()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public Vector2 GetInteractLocation(Vector3 worldPosition)
     {
         return tilemap.CellToWorld(tilemap.WorldToCell(worldPosition)) + new Vector3(.5f, .5f, 0f);

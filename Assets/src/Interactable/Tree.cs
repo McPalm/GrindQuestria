@@ -54,5 +54,4 @@ public class Tree : NetworkBehaviour, IInteractable
     }
 
     public Vector2 GetInteractLocation(Vector3 where) => transform.position + new Vector3(0f, -.25f, 0f);
-    public Vector2 GetInteractLocation() => transform.position + new Vector3(0f, -.25f, 0f);
 }
