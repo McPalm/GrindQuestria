@@ -38,7 +38,6 @@ public class Movement : NetworkBehaviour
     {
         if (isServer)
             return;
-        Debug.Log("Recieved");
         if (time > lastUpdate)
         {
             lastUpdate = time;
