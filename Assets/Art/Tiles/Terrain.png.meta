@@ -19,19 +19,19 @@ TextureImporter:
     second: Terrain_4
   - first:
       213: -4637172546458061636
-    second: Terrain_5
+    second: doorframe
   - first:
       213: 1404196382344981941
-    second: Terrain_6
+    second: doorclosed
   - first:
       213: -6537453368205885854
-    second: Terrain_7
+    second: dooropen
   - first:
       213: -3932762474534642510
-    second: Terrain_8
+    second: floor_planks2
   - first:
       213: -38647862416911262
-    second: Terrain_9
+    second: floor_planks
   - first:
       213: 9158922217335370285
     second: Terrain_10
@@ -347,6 +347,111 @@ TextureImporter:
       bones: []
       spriteID: bfb58f21065cf8b00800000000000000
       internalID: 833101472512629755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doorframe
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 85
+        width: 16
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb47c26432475afb0800000000000000
+      internalID: -4637172546458061636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doorclosed
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 94
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bdaf848b25bc7310800000000000000
+      internalID: 1404196382344981941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dooropen
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 94
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26e386c6ccc4645a0800000000000000
+      internalID: -6537453368205885854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_planks2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bc5067bd550c69c0800000000000000
+      internalID: -3932762474534642510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_planks
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 264df4159f1b67ff0800000000000000
+      internalID: -38647862416911262
       vertices: []
       indices: 
       edges: []

@@ -8,7 +8,7 @@ public class BuildTask : MonoBehaviour
     {
         at = Vector3Int.FloorToInt(at) + new Vector3(.5f, .5f, 0f);
         transform.position = at;
-        GetComponent<SpriteRenderer>().sprite = building.tile.sprite;
+        // GetComponent<SpriteRenderer>().sprite = building.tile.sprite;
     }
 
     public Building building;

@@ -8,6 +8,6 @@ public class Building : ScriptableObject
 {
     public Item[] materials;
     public int[] materialsQTY;
-    public Tile tile;
+    public TileBase tile;
     public TileLayer tileLayer;
 }
