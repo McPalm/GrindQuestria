@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22986f90ee5ed9342baaaa99aecf6797, type: 3}
   m_Name: Door_Wood
   m_EditorClassIdentifier: 
-  materials: []
-  materialsQTY: 
-  tile: {fileID: 0}
-  tileLayer: 0
+  materials:
+  - {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
+  materialsQTY: 01000000
+  tile: {fileID: 11400000, guid: a790bd3ede834f441b7bffeacfd2fbe7, type: 2}
+  tileLayer: 1
