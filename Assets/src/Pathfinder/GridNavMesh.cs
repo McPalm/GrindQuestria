@@ -37,6 +37,12 @@ public class GridNavMesh : MonoBehaviour, INavMesh
     bool IsAccessible(Vector3Int position)
     {
         var tile = walls.GetTile(position);
-        return tile == null;
+        if (tile == null)
+            return true;
+        if(tile is BuildingTile)
+        {
+            return ((BuildingTile)tile).colliderType == Tile.ColliderType.None;
+        }
+        return false;
     }
 }
