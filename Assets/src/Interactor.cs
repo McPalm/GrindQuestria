@@ -21,7 +21,7 @@ public class Interactor : NetworkBehaviour
         if (target.ValidTarget)
         {
             startTime = NetworkTime.time;
-            endTime = NetworkTime.time + target.TimeToComplete;
+            endTime = NetworkTime.time + target.TimeToComplete(worldPosition);
             this.target = target;
             Busy = true;
             GetComponent<Animator>().SetBool("Working", true);

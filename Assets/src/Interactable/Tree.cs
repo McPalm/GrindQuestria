@@ -13,7 +13,7 @@ public class Tree : NetworkBehaviour, IInteractable
     public bool Alive;
 
     public float MinimumDistance => 1f;
-    public float TimeToComplete => 7f;
+    public float TimeToComplete(Vector3 position) => 7f;
     public bool ValidTarget => Alive;
 
 

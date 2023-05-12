@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class Blueprint : MonoBehaviour, IInteractable
 {
-    public NetTilemap tilemap;
+    public NetTilemap blueprintTilemap;
 
     public bool ValidTarget => true;
     public float MinimumDistance => 1f;
-    public float TimeToComplete => 5f;
+    public float wallBuildTime = 7f;
+    public float floorBuildtime = 3f;
+    public float TimeToComplete(Vector3 worldPosition) => HasWall(worldPosition) ? wallBuildTime : floorBuildtime;
+
 
     public Vector2 GetInteractLocation(Vector3 worldPosition)
     {
-        return tilemap.CellToWorld(tilemap.WorldToCell(worldPosition)) + new Vector3(.5f, .5f, 0f);
+        return blueprintTilemap.CellToWorld(blueprintTilemap.WorldToCell(worldPosition)) + new Vector3(.5f, .5f, 0f);
     }
 
     public void Interact(GameObject user, Vector3 worldPosition)
     {
         // check if task is still available
-        var cellPos = tilemap.WorldToCell(worldPosition);
-        var blueprintTile = tilemap.GetTile(cellPos);
+        var cellPos = blueprintTilemap.WorldToCell(worldPosition);
+        var blueprintTile = blueprintTilemap.GetTile(cellPos);
         if (blueprintTile == null)
             return;
         var building = ((BuildingTile)blueprintTile).building;
@@ -27,7 +30,7 @@ public class Blueprint : MonoBehaviour, IInteractable
         if(building == null)
         {
             DemolishAndRefund(user, cellPos);
-            tilemap.SetTile(cellPos, null);
+            blueprintTilemap.SetTile(cellPos, null);
             return;
         }
         // check if we have the materials
@@ -40,7 +43,7 @@ public class Blueprint : MonoBehaviour, IInteractable
             DemolishAndRefund(user, cellPos);
         // remove from blueprint and add to tilemap        
         GridManager.GetLayer(building.tileLayer).SetTile(cellPos, blueprintTile);
-        tilemap.SetTile(cellPos, null);
+        blueprintTilemap.SetTile(cellPos, null);
     }
 
     public void DemolishAndRefund(GameObject user, Vector3Int position)
@@ -56,5 +59,21 @@ public class Blueprint : MonoBehaviour, IInteractable
             }
         }
         GridManager.instance.Walls.SetTile(position, null);
+    }
+
+    public bool HasWall(Vector3 worldPosition, NetTilemap tilemap = null) => HasWall(blueprintTilemap.WorldToCell(worldPosition), tilemap);
+    public bool HasWall(Vector3Int cellPosition, NetTilemap tilemap = null)
+    {
+        if (tilemap == null)
+            tilemap = blueprintTilemap;
+        var tile = tilemap.GetTile(cellPosition);
+        if (tile == null)
+            return false;
+        if(tile is BuildingTile)
+        {
+            var b = tile as BuildingTile;
+            return b.building.tileLayer == TileLayer.wall;
+        }
+        return true;
     }
 }
