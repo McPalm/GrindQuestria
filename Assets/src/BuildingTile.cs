@@ -13,13 +13,14 @@ public class BuildingTile : Tile
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
         base.GetTileData(position, tilemap, ref tileData);
-        if(sprites.Length > 0)
+        tileData.transform = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one);
+        tileData.flags = TileFlags.LockTransform;
+        if (sprites.Length > 0)
         {
-            tileData.sprite = sprites[(999999+position.x + position.y)%sprites.Length];
+            tileData.sprite = sprites[Mathf.Abs(position.x + position.y)%sprites.Length];
         }
-        var m = tileData.transform;
-        m.SetTRS(Vector3.zero, Quaternion.identity, Vector3.one);
-        tileData.transform = m;
-
+        //var m = tileData.transform;
+        // m.SetTRS(Vector3.zero, Quaternion.identity, Vector3.one);
     }
+
 }
