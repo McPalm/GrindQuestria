@@ -15,7 +15,12 @@ public class BuildingTile : Tile
         base.GetTileData(position, tilemap, ref tileData);
         tileData.transform = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one);
         tileData.flags = TileFlags.LockTransform;
-        if (sprites.Length > 0)
+        if (tilemap.cellBounds.zMax > 1) // hack to smuggle grid ID out to us.
+        {
+            tileData.gameObject = null;
+            tileData.colliderType = ColliderType.Grid;
+        }
+        if (sprites != null && sprites.Length > 0)
         {
             tileData.sprite = sprites[Mathf.Abs(position.x + position.y)%sprites.Length];
         }

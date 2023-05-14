@@ -26497,6 +26497,7 @@ MonoBehaviour:
   blueprintTilemap: {fileID: 1789106131}
   wallBuildTime: 7
   floorBuildtime: 3
+  SmuggledTile: {fileID: 11400000, guid: 04f8e0b6b44929d4b8089838f0a9ae0d, type: 2}
 --- !u!114 &1789106130
 MonoBehaviour:
   m_ObjectHideFlags: 0

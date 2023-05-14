@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Blueprint : MonoBehaviour, IInteractable
 {
@@ -12,6 +13,13 @@ public class Blueprint : MonoBehaviour, IInteractable
     public float floorBuildtime = 3f;
     public float TimeToComplete(Vector3 worldPosition) => HasWall(worldPosition) ? wallBuildTime : floorBuildtime;
 
+    [SerializeField]
+    TileBase SmuggledTile;
+
+    void Start()
+    {
+        GetComponent<Tilemap>().SetTile(new Vector3Int(99, 99, 99), SmuggledTile);
+    }
 
     public Vector2 GetInteractLocation(Vector3 worldPosition)
     {
