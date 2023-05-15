@@ -37,7 +37,7 @@ public class Blueprint : MonoBehaviour, IInteractable
         // check if we are bulldozing
         if(building == null)
         {
-            DemolishAndRefund(user, cellPos);
+            DemolishAndRefund(user, cellPos, TileLayer.wall);
             blueprintTilemap.SetTile(cellPos, null);
             return;
         }
@@ -47,16 +47,20 @@ public class Blueprint : MonoBehaviour, IInteractable
             return;
         inventory.RemoveItem(building.materials[0], building.materialsQTY[0]);
         // remove old wall if any
-        if (GridManager.GetLayer(building.tileLayer).GetTile(cellPos) != null)
-            DemolishAndRefund(user, cellPos);
+        if (GridManager.GetLayer(TileLayer.wall).GetTile(cellPos) != null)
+            DemolishAndRefund(user, cellPos, TileLayer.wall);
+        // remove old floor if any and were working on floors.
+        if (building.tileLayer == TileLayer.ground && GridManager.GetLayer(building.tileLayer).GetTile(cellPos) != null)
+            DemolishAndRefund(user, cellPos, building.tileLayer);
         // remove from blueprint and add to tilemap        
         GridManager.GetLayer(building.tileLayer).SetTile(cellPos, blueprintTile);
         blueprintTilemap.SetTile(cellPos, null);
     }
 
-    public void DemolishAndRefund(GameObject user, Vector3Int position)
+    public void DemolishAndRefund(GameObject user, Vector3Int position, TileLayer tileLayer)
     {
-        var tile = GridManager.instance.Walls.GetTile(position);
+        var tilemap = GridManager.GetLayer(tileLayer);
+        var tile = tilemap.GetTile(position);
         if(tile != null && tile is BuildingTile)
         {
             var bTile = tile as BuildingTile;
@@ -66,7 +70,7 @@ public class Blueprint : MonoBehaviour, IInteractable
                 inventory.AddItem(bTile.building.materials[i], bTile.building.materialsQTY[i]);
             }
         }
-        GridManager.instance.Walls.SetTile(position, null);
+        tilemap.SetTile(position, null);
     }
 
     public bool HasWall(Vector3 worldPosition, NetTilemap tilemap = null) => HasWall(blueprintTilemap.WorldToCell(worldPosition), tilemap);
@@ -80,6 +84,8 @@ public class Blueprint : MonoBehaviour, IInteractable
         if(tile is BuildingTile)
         {
             var b = tile as BuildingTile;
+            if (b.building == null)
+                return false;
             return b.building.tileLayer == TileLayer.wall;
         }
         return true;
