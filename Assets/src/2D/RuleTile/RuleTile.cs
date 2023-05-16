@@ -353,7 +353,7 @@ namespace UnityEngine
                             tileData.sprite = rule.m_Sprites[0];
                             break;
                         case TilingRule.OutputSprite.Random:
-                            int index = Mathf.Clamp(Mathf.FloorToInt(GetPerlinValue(position, rule.m_PerlinScale, 100000f) * rule.m_Sprites.Length), 0, rule.m_Sprites.Length - 1);
+                            int index = Mathf.FloorToInt(40f *(2f + OpenSimplex2S.Noise2(0, position.x, position.y)))% rule.m_Sprites.Length;
                             tileData.sprite = rule.m_Sprites[index];
                             if (rule.m_RandomTransform != TilingRule.Transform.Fixed)
                                 transform = ApplyRandomTransform(rule.m_RandomTransform, transform, rule.m_PerlinScale, position);

@@ -57,6 +57,8 @@ SpriteAtlas:
   - {fileID: 833101472512629755, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -8314697479797604436, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -8560909203809222747, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: 9158922217335370285, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: -2913927307954446974, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -38647862416911262, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -5779282676337348671, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -6337999885091750218, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
@@ -70,6 +72,8 @@ SpriteAtlas:
   - {fileID: -174804484191063705, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   - {fileID: 3275407576765064038, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   - {fileID: -7067808830664889489, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: 2058049638561703503, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: -3001449038190906842, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   - {fileID: 21300000, guid: 2e2e55870c38a584b9d3fd2d53036796, type: 3}
   - {fileID: 3973933647655803777, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
   - {fileID: 614054776241813996, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
@@ -96,6 +100,8 @@ SpriteAtlas:
   - Terrain_15
   - Terrain_12
   - Terrain_13
+  - Terrain_10
+  - Terrain_11
   - floor_planks
   - Terrain_3
   - Terrain_2
@@ -109,6 +115,8 @@ SpriteAtlas:
   - Objects_1
   - Objects_2
   - Objects_3
+  - rock
+  - chopping block
   - Box32
   - Pony_2
   - Pony_3

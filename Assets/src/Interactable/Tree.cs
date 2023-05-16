@@ -44,7 +44,8 @@ public class Tree : NetworkBehaviour, IInteractable
     [ClientRpc]
     void ChopEffects()
     {
-        ParticleSystem.Play();
+        if(ParticleSystem != null)
+            ParticleSystem.Play();
     }
 
     public void Interact(GameObject user, Vector3 worldPosition)

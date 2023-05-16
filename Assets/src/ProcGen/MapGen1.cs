@@ -10,6 +10,7 @@ public class MapGen1 : MonoBehaviour
     public TileBase Grass1;
     public TileBase Grass2;
     public GameObject Tree;
+    public GameObject Rock;
 
 
     // Utility
@@ -17,7 +18,7 @@ public class MapGen1 : MonoBehaviour
     int Y(int value) => value / size;
     Vector3Int Cell(int value) => new Vector3Int(X(value) - size / 2, Y(value) - size / 2, 0);
     float SquareDistanceFromCenter(int value) => Mathf.Abs((X(value) - size / 2) * (Y(value) - size / 2));
-
+    HashSet<Vector3Int> UsedSpots;
 
     IEnumerator Start()
     {
@@ -30,11 +31,11 @@ public class MapGen1 : MonoBehaviour
     [Server]
     IEnumerator Generate()
     {
+        UsedSpots = new HashSet<Vector3Int>();
         yield return GenerateHeight();
-        yield return null;
         yield return PaintGrassBasedOnHeight();
-        yield return null;
         yield return PlaceTrees();
+        yield return PlaceRocks();
     }
 
     IEnumerator Process(System.Action<int> action)
@@ -72,13 +73,46 @@ public class MapGen1 : MonoBehaviour
     {
         void A(int i)
         {
-            if (SquareDistanceFromCenter(i) > 100f && heightMap[i] - Random.value < -.7f && Random.value < .3f)
+            if (IsAvailable(Cell(i)))
             {
-                // place tree
-                var o = Instantiate(Tree, Cell(i) + new Vector3(Random.value, Random.value), Quaternion.identity);
-                NetworkServer.Spawn(o);
+                if (SquareDistanceFromCenter(i) > 100f && heightMap[i] - Random.value < -.7f && Random.value < .3f)
+                {
+                    // place tree
+                    var o = Instantiate(Tree, Cell(i) + new Vector3(Random.value, Random.value), Quaternion.identity);
+                    NetworkServer.Spawn(o);
+                    ClaimRadius(Cell(i));
+                }
             }
         }
         yield return Process(A);
     }
+
+    IEnumerator PlaceRocks()
+    {
+        void A(int i)
+        {
+            if(IsAvailable(Cell(i)))
+            {
+                if(SquareDistanceFromCenter(i) > 100f && (heightMap[i] + Random.value) > 0f && Random.value < .01f)
+                {
+                    var o = Instantiate(Rock, Cell(i) + new Vector3(Random.value, Random.value), Quaternion.identity);
+                    NetworkServer.Spawn(o);
+                    ClaimSpot(Cell(i));
+                }
+            }
+        }
+        yield return Process(A);
+    }
+
+    bool IsAvailable(Vector3Int spot) => !UsedSpots.Contains(spot);
+    void ClaimSpot(Vector3Int spot) => UsedSpots.Add(spot);
+    void ClaimRadius(Vector3Int spot)
+    {
+        ClaimSpot(spot);
+        ClaimSpot(spot + Vector3Int.up);
+        ClaimSpot(spot + Vector3Int.right);
+        ClaimSpot(spot + Vector3Int.down);
+        ClaimSpot(spot + Vector3Int.left);
+    }
+
 }
