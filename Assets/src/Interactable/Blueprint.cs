@@ -57,6 +57,24 @@ public class Blueprint : MonoBehaviour, IInteractable
         blueprintTilemap.SetTile(cellPos, null);
     }
 
+    bool HasItem(Building building, Inventory inventory)
+    {
+        for (int i = 0; i < building.materials.Length; i++)
+        {
+            if(inventory.NumberOfItem(building.materials[i]) < building.materialsQTY[i])
+                return false;
+        }
+        return true;
+    }
+
+    void RemoveItems(Building building, Inventory inventory)
+    {
+        for (int i = 0; i < building.materials.Length; i++)
+        {
+            inventory.RemoveItem(building.materials[i], building.materialsQTY[i]);
+        }
+    }
+
     public void DemolishAndRefund(GameObject user, Vector3Int position, TileLayer tileLayer)
     {
         var tilemap = GridManager.GetLayer(tileLayer);

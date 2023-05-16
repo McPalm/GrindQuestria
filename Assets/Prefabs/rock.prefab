@@ -152,7 +152,7 @@ MonoBehaviour:
   Leaves: []
   ParticleSystem: {fileID: 0}
   Alive: 1
-  reward: {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
+  reward: {fileID: 11400000, guid: 4cc8b5634beaee5429ec7709f00b41b2, type: 2}
   rewardLow: 1
   rewardHigh: 1
 --- !u!61 &5308050265799430393

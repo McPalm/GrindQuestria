@@ -16,13 +16,21 @@ public class ClickToMove : MonoBehaviour
             var clickedInteractable = Physics2D.Raycast(clickPos, Vector2.zero, 0f, InteractionLayer);
             if (clickedInteractable)
             {
-                netInput.DoThing(new DoThing.ThingToDo()
-                {
-                    what = DoThing.Things.interact,
-                    who = clickedInteractable.transform.gameObject,
-                    where = clickPos,
-                });
-
+                var interactable = clickedInteractable.transform.GetComponent<IInteractable>();
+                if (interactable != null)
+                    netInput.DoThing(new DoThing.ThingToDo()
+                    {
+                        what = DoThing.Things.interact,
+                        who = clickedInteractable.transform.gameObject,
+                        where = clickPos,
+                    });
+                else
+                    netInput.DoThing(new DoThing.ThingToDo()
+                    {
+                        what = DoThing.Things.interact,
+                        who = Shops.Instance.gameObject,
+                        where = clickPos,
+                    });
             }
             else
             {

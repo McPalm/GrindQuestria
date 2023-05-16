@@ -52,6 +52,8 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 8033092973025764044, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
+  - {fileID: -488721925442295091, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
+  - {fileID: 4337684191699249041, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
   - {fileID: -4637172546458061636, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -2860982009417361707, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: 833101472512629755, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
@@ -95,6 +97,8 @@ SpriteAtlas:
   - {fileID: -7908359208127360021, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
   m_PackedSpriteNamesToIndex:
   - Items_0
+  - Item_Plank
+  - Items_Rock
   - doorframe
   - Terrain_14
   - Terrain_15

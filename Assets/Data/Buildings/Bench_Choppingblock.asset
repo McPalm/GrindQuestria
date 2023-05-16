@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 310ed17ade712094d93988274d987834, type: 3}
-  m_Name: ItemCollection
+  m_Script: {fileID: 11500000, guid: 22986f90ee5ed9342baaaa99aecf6797, type: 3}
+  m_Name: Bench_Choppingblock
   m_EditorClassIdentifier: 
-  List:
-  - {fileID: 11400000, guid: 7acba2b6540f93d4193d620d5befe284, type: 2}
-  - {fileID: 11400000, guid: 4cc8b5634beaee5429ec7709f00b41b2, type: 2}
+  materials:
   - {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
+  - {fileID: 11400000, guid: 4cc8b5634beaee5429ec7709f00b41b2, type: 2}
+  materialsQTY: 0100000001000000
+  tile: {fileID: 11400000, guid: ae910bf88d9552646b0d5a255ec6bd6c, type: 2}
+  tileLayer: 1

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2323c1be1c03a94d8554fa875425124, type: 3}
   m_Name: Plank
   m_EditorClassIdentifier: 
-  displayName: 
-  sprite: {fileID: 0}
+  displayName: Plank
+  sprite: {fileID: -488721925442295091, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
   stackSize: 8

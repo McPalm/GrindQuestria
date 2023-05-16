@@ -134,7 +134,7 @@ public class DoThing : MonoBehaviour
         walkhere = 0,
         interact = 1,
         waitfortask = 2,
-        pathhere = 3
+        pathhere = 3,
     }
 
     void PathTo(Vector2 where)
