@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Shops : NetworkBehaviour, IInteractable
 {
-
     static public Shops Instance { get; private set; }
 
     public NetTilemap WallTilemap;
@@ -29,4 +28,6 @@ public class Shops : NetworkBehaviour, IInteractable
     {
         Instance = this;
     }
+
+
 }

@@ -55,6 +55,7 @@ SpriteAtlas:
   - {fileID: -488721925442295091, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
   - {fileID: 4337684191699249041, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
   - {fileID: -4637172546458061636, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: -4458388979400810444, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -2860982009417361707, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: 833101472512629755, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -8314697479797604436, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
@@ -100,6 +101,7 @@ SpriteAtlas:
   - Item_Plank
   - Items_Rock
   - doorframe
+  - Terrain_16
   - Terrain_14
   - Terrain_15
   - Terrain_12
