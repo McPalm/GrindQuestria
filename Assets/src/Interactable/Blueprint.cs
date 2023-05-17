@@ -43,9 +43,10 @@ public class Blueprint : MonoBehaviour, IInteractable
         }
         // check if we have the materials
         var inventory = user.GetComponent<Inventory>();
-        if (inventory.HasItem(building.materials[0]) == false)
+        if (HasItem(building, inventory))
+            RemoveItems(building, inventory);
+        else
             return;
-        inventory.RemoveItem(building.materials[0], building.materialsQTY[0]);
         // remove old wall if any
         if (GridManager.GetLayer(TileLayer.wall).GetTile(cellPos) != null)
             DemolishAndRefund(user, cellPos, TileLayer.wall);

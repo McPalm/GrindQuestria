@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 979c2ace80a9192468c25767b7c6b11c, type: 3}
-  m_Name: Bench_ChoppingBlock
+  m_Name: Shop_ChoppingBlock
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -3001449038190906842, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
