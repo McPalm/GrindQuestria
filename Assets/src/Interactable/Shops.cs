@@ -29,5 +29,8 @@ public class Shops : NetworkBehaviour, IInteractable
         Instance = this;
     }
 
-
+    void OpenShopUI(Vector3Int where)
+    {
+        Debug.Log("Open Shop!");
+    }
 }

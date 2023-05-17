@@ -17,20 +17,24 @@ public class ClickToMove : MonoBehaviour
             if (clickedInteractable)
             {
                 var interactable = clickedInteractable.transform.GetComponent<IInteractable>();
-                if (interactable != null)
+                if (interactable != null) // shop
+                {
                     netInput.DoThing(new DoThing.ThingToDo()
                     {
                         what = DoThing.Things.interact,
                         who = clickedInteractable.transform.gameObject,
                         where = clickPos,
                     });
+                }
                 else
+                {
                     netInput.DoThing(new DoThing.ThingToDo()
                     {
-                        what = DoThing.Things.interact,
-                        who = Shops.Instance.gameObject,
+                        what = DoThing.Things.walkhere,
                         where = clickPos,
                     });
+                    netInput.OpenShop(clickPos);
+                }
             }
             else
             {

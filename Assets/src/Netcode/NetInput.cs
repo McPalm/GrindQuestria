@@ -7,6 +7,7 @@ public class NetInput : NetworkBehaviour
 {
     [SyncVar]
     public GameObject MyCharacter;
+    ShopOpener shopOpener;
 
     IEnumerator Start()
     {
@@ -32,6 +33,7 @@ public class NetInput : NetworkBehaviour
         FindObjectOfType<CameraFollow>().follow = MyCharacter.transform;
         FindObjectOfType<ClickToMove>().netInput = this;
         FindObjectOfType<BlueprintEditor>(includeInactive: true).NetInput = this;
+        shopOpener = MyCharacter.AddComponent<ShopOpener>();
     }
 
     private void OnDestroy()
@@ -40,8 +42,20 @@ public class NetInput : NetworkBehaviour
             CharacterRegistry.Instance.YieldCharacter(MyCharacter);
     }
 
-    [Command]
+
+    public void OpenShop(Vector3 location)
+    {
+        shopOpener.openShop = true;
+        shopOpener.where = location;
+    }
+
     public void DoThing(DoThing.ThingToDo thing)
+    {
+        shopOpener.openShop = false;
+        CmdDoThing(thing);
+    }
+    [Command]
+    public void CmdDoThing(DoThing.ThingToDo thing)
     {
         MyCharacter.GetComponent<DoThing>().DoThingImmediately(thing);
     }
@@ -50,5 +64,29 @@ public class NetInput : NetworkBehaviour
     {
         var tile = TileCollection.Instance.GetTile(tileIndex);
         GridManager.instance.Blueprint.SetTile(position, tile);
+    }
+
+    private class ShopOpener : MonoBehaviour
+    {
+        public bool openShop;
+        public Vector2 where;
+
+        void Update()
+        {
+            if (openShop)
+            {
+                var sqrDistance = ((Vector2)transform.position - where).sqrMagnitude;
+                if (sqrDistance < 1f)
+                {
+                    OpenShop();
+                }
+            }
+        }
+
+        void OpenShop()
+        {
+            Debug.Log("Open!");
+            openShop = false;
+        }
     }
 }
