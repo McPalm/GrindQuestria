@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu]
 public class ShopData : ScriptableObject
 {
-    public string IngameName;
+    public string displayName;
     public Recepie[] Recepies;
     public TileBase Tile;
 }

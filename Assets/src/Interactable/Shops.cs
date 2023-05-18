@@ -12,6 +12,8 @@ public class Shops : NetworkBehaviour, IInteractable
     public bool ValidTarget => true;
     public float MinimumDistance => 1f;
 
+    public ShopData[] AllShops;
+
     public Vector2 GetInteractLocation(Vector3 worldPosition)
     {
         return WallTilemap.CellToWorld(WallTilemap.WorldToCell(worldPosition));
@@ -29,8 +31,21 @@ public class Shops : NetworkBehaviour, IInteractable
         Instance = this;
     }
 
-    void OpenShopUI(Vector3Int where)
+    public void OpenShopUI(Vector3Int where)
     {
-        Debug.Log("Open Shop!");
+        var shop = ShopAt(where);
+        if(shop != null)
+            FindObjectOfType<CraftMenuUI>(true).Open(shop);
+    }
+
+    ShopData ShopAt(Vector3Int position)
+    {
+        var tile = WallTilemap.GetTile(position);
+        if (tile == null)
+            return null;
+        foreach (var shop in AllShops)
+            if (shop.Tile == tile)
+                return shop;
+        return null;
     }
 }

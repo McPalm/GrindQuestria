@@ -85,7 +85,7 @@ public class NetInput : NetworkBehaviour
 
         void OpenShop()
         {
-            Debug.Log("Open!");
+            Shops.Instance.OpenShopUI(GridManager.instance.Walls.WorldToCell(where));
             openShop = false;
         }
     }

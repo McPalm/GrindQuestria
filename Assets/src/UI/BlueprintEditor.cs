@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class BlueprintEditor : MonoBehaviour
@@ -20,7 +21,9 @@ public class BlueprintEditor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        if (Input.GetMouseButtonDown(0))
         {
             var clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // we clicked!

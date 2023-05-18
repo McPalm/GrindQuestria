@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7072803758760118123}
   - component: {fileID: 228880921881913515}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Product Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 2609252022822018256}
   - component: {fileID: 7301387250320119640}
   m_Layer: 5
-  m_Name: Result Icon
+  m_Name: Product Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1057,6 +1057,7 @@ GameObject:
   - component: {fileID: 9010083426448358286}
   - component: {fileID: 9010083426448358281}
   - component: {fileID: 9010083426448358287}
+  - component: {fileID: 1541955548378315917}
   m_Layer: 5
   m_Name: CraftMenuItem
   m_TagString: Untagged
@@ -1175,3 +1176,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1541955548378315917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010083426448358283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62104d568ee09d441969503ecde99b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: {fileID: 228880921881913515}
+  productIcon: {fileID: 7301387250320119640}
+  materialIcon:
+  - {fileID: 1699368239723973617}
+  - {fileID: 1218200795837614369}
+  - {fileID: 8022350542412625454}
+  - {fileID: 2299848771455739005}
+  materialQTY:
+  - {fileID: 6324248650233362010}
+  - {fileID: 892760634984114302}
+  - {fileID: 9053370292593697184}
+  - {fileID: 2837468636925636165}
