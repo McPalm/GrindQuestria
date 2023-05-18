@@ -11,7 +11,7 @@ public class Blueprint : MonoBehaviour, IInteractable
     public float MinimumDistance => 1f;
     public float wallBuildTime = 7f;
     public float floorBuildtime = 3f;
-    public float TimeToComplete(Vector3 worldPosition) => HasWall(worldPosition) ? wallBuildTime : floorBuildtime;
+    public float TimeToComplete(DoThing.ThingToDo info) => HasWall(info.where) ? wallBuildTime : floorBuildtime;
 
     [SerializeField]
     TileBase SmuggledTile;
@@ -26,10 +26,10 @@ public class Blueprint : MonoBehaviour, IInteractable
         return blueprintTilemap.CellToWorld(blueprintTilemap.WorldToCell(worldPosition)) + new Vector3(.5f, .5f, 0f);
     }
 
-    public void Interact(GameObject user, Vector3 worldPosition)
+    public void Interact(GameObject user, DoThing.ThingToDo info)
     {
         // check if task is still available
-        var cellPos = blueprintTilemap.WorldToCell(worldPosition);
+        var cellPos = blueprintTilemap.WorldToCell(info.where);
         var blueprintTile = blueprintTilemap.GetTile(cellPos);
         if (blueprintTile == null)
             return;
@@ -43,8 +43,8 @@ public class Blueprint : MonoBehaviour, IInteractable
         }
         // check if we have the materials
         var inventory = user.GetComponent<Inventory>();
-        if (HasItem(building, inventory))
-            RemoveItems(building, inventory);
+        if (inventory.HasBundles(building.materials))
+            inventory.RemoveBundles(building.materials);
         else
             return;
         // remove old wall if any
@@ -58,24 +58,6 @@ public class Blueprint : MonoBehaviour, IInteractable
         blueprintTilemap.SetTile(cellPos, null);
     }
 
-    bool HasItem(Building building, Inventory inventory)
-    {
-        for (int i = 0; i < building.materials.Length; i++)
-        {
-            if(inventory.NumberOfItem(building.materials[i]) < building.materialsQTY[i])
-                return false;
-        }
-        return true;
-    }
-
-    void RemoveItems(Building building, Inventory inventory)
-    {
-        for (int i = 0; i < building.materials.Length; i++)
-        {
-            inventory.RemoveItem(building.materials[i], building.materialsQTY[i]);
-        }
-    }
-
     public void DemolishAndRefund(GameObject user, Vector3Int position, TileLayer tileLayer)
     {
         var tilemap = GridManager.GetLayer(tileLayer);
@@ -86,7 +68,7 @@ public class Blueprint : MonoBehaviour, IInteractable
             var inventory = user.GetComponent<Inventory>();
             for(int i = 0; i < bTile.building.materials.Length; i++)
             {
-                inventory.AddItem(bTile.building.materials[i], bTile.building.materialsQTY[i]);
+                inventory.AddBundles(bTile.building.materials);
             }
         }
         tilemap.SetTile(position, null);

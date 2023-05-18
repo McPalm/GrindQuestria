@@ -34,6 +34,7 @@ public class NetInput : NetworkBehaviour
         FindObjectOfType<ClickToMove>().netInput = this;
         FindObjectOfType<BlueprintEditor>(includeInactive: true).NetInput = this;
         shopOpener = MyCharacter.AddComponent<ShopOpener>();
+        shopOpener.StartCraft += CraftItemAtShop;
     }
 
     private void OnDestroy()
@@ -70,6 +71,7 @@ public class NetInput : NetworkBehaviour
     {
         public bool openShop;
         public Vector2 where;
+        public event System.Action<Vector3Int, int> StartCraft;
 
         void Update()
         {
@@ -85,8 +87,20 @@ public class NetInput : NetworkBehaviour
 
         void OpenShop()
         {
-            Shops.Instance.OpenShopUI(GridManager.instance.Walls.WorldToCell(where));
+            var gridlocation = GridManager.instance.Walls.WorldToCell(where);
+            Shops.Instance.OpenShopUI(gridlocation, (int i) => StartCraft?.Invoke(gridlocation, i));
             openShop = false;
         }
+    }
+
+    private void CraftItemAtShop(Vector3Int shopLocation, int craftIndex)
+    {
+        CmdDoThing(new DoThing.ThingToDo()
+        {
+            what = global::DoThing.Things.interact,
+            who = Shops.Instance.gameObject,
+            where = GridManager.instance.Walls.CellToWorld(shopLocation),
+            number = craftIndex,
+        });
     }
 }

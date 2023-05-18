@@ -6,7 +6,8 @@ public interface IInteractable
 {
     bool ValidTarget { get; }
     float MinimumDistance { get; }
-    void Interact(GameObject user, Vector3 worldPosition);
-    float TimeToComplete(Vector3 worldPosition);
+    void Interact(GameObject user, DoThing.ThingToDo info);
+    float TimeToComplete(DoThing.ThingToDo info);
     Vector2 GetInteractLocation(Vector3 worldPosition);
 }
+

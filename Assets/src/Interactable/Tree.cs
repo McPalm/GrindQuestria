@@ -13,7 +13,7 @@ public class Tree : NetworkBehaviour, IInteractable
     public bool Alive;
 
     public float MinimumDistance => 1f;
-    public float TimeToComplete(Vector3 position) => 7f;
+    public float TimeToComplete(DoThing.ThingToDo info) => 7f;
     public bool ValidTarget => Alive;
 
 
@@ -48,7 +48,7 @@ public class Tree : NetworkBehaviour, IInteractable
             ParticleSystem.Play();
     }
 
-    public void Interact(GameObject user, Vector3 worldPosition)
+    public void Interact(GameObject user, DoThing.ThingToDo info)
     {
         if(Alive)
             GetChopped(user);

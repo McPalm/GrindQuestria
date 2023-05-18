@@ -5,8 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Recepie : ScriptableObject
 {
-    public Item Produce;
-    public int ProduceQTY;
-    public Item[] Ingredients;
-    public int[] IngredientsQTY;
+    public ItemBundle Product;
+    public ItemBundle[] Ingredients;
 }

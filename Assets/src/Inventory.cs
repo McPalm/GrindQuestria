@@ -75,6 +75,29 @@ public class Inventory : NetworkBehaviour
         }
         return -1;
     }
+
+    public bool HasBundle(ItemBundle bundle)
+    {
+        return NumberOfItem(bundle.item) >= bundle.qty;
+    }
+    public bool HasBundles(ItemBundle[] bundles)
+    {
+        foreach (var bundle in bundles)
+            if (!HasBundle(bundle))
+                return false;
+        return true;
+    }
+
+    public void RemoveBundles(params ItemBundle[] bundles)
+    {
+        foreach (var bundle in bundles)
+            RemoveItem(bundle.item, bundle.qty);
+    }
+    public void AddBundles(params ItemBundle[] bundles)
+    {
+        foreach (var bundle in bundles)
+            AddItem(bundle.item, bundle.qty);
+    }
     [Server]
     public int RemoveItem(Item item, int qty)
     {

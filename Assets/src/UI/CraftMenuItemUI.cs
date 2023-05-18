@@ -23,16 +23,16 @@ public class CraftMenuItemUI : MonoBehaviour
     public void OpenRecepie(Recepie recepie, System.Action onClick)
     {
         OnClick = onClick;
-        displayName.text = recepie.Produce.displayName;
-        productIcon.sprite = recepie.Produce.sprite;
+        displayName.text = recepie.Product.item.displayName;
+        productIcon.sprite = recepie.Product.item.sprite;
         for(int i = 0; i < materialIcon.Length; i++)
         {
             if(i < recepie.Ingredients.Length)
             {
                 materialIcon[i].gameObject.SetActive(true);
                 materialQTY[i].gameObject.SetActive(true);
-                materialIcon[i].sprite = recepie.Ingredients[i].sprite;
-                materialQTY[i].text = $"x{recepie.IngredientsQTY[i]}";
+                materialIcon[i].sprite = recepie.Ingredients[i].item.sprite;
+                materialQTY[i].text = $"x{recepie.Ingredients[i].qty}";
             }
             else
             {

@@ -19,23 +19,46 @@ public class Shops : NetworkBehaviour, IInteractable
         return WallTilemap.CellToWorld(WallTilemap.WorldToCell(worldPosition));
     }
 
-    public void Interact(GameObject user, Vector3 worldPosition)
+    public void Interact(GameObject user, DoThing.ThingToDo info)
     {
-        Debug.Log("And nothing Happened!");
+        var recepie = RecepieFor(info);
+        if (recepie == null)
+            return;
+        var inventory = user.GetComponent<Inventory>();
+        if(inventory.HasBundles(recepie.Ingredients))
+        {
+            inventory.RemoveBundles(recepie.Ingredients);
+            inventory.AddBundles(recepie.Product);
+        }
+        else
+        {
+            Debug.Log("Missing Items to craft!");
+        }
     }
 
-    public float TimeToComplete(Vector3 worldPosition) => 1f;
+    public float TimeToComplete(DoThing.ThingToDo info) => 1f;
     
     void Awake()
     {
         Instance = this;
     }
 
-    public void OpenShopUI(Vector3Int where)
+    public void OpenShopUI(Vector3Int where, System.Action<int> craftAction)
     {
         var shop = ShopAt(where);
         if(shop != null)
-            FindObjectOfType<CraftMenuUI>(true).Open(shop);
+            FindObjectOfType<CraftMenuUI>(true).Open(shop, craftAction);
+    }
+
+    Recepie RecepieFor(DoThing.ThingToDo info)
+    {
+        var where = WallTilemap.WorldToCell(info.where);
+        var shop = ShopAt(where);
+        if (shop == null)
+            return null;
+        if (info.number < shop.Recepies.Length)
+            return shop.Recepies[info.number];
+        return null;
     }
 
     ShopData ShopAt(Vector3Int position)

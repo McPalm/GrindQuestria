@@ -91,7 +91,7 @@ public class DoThing : MonoBehaviour
                     if (inRange)
                     {
                         movement.Direction = Vector2.zero;
-                        GetComponent<Interactor>().InteractWith(interactable, thing.where);
+                        GetComponent<Interactor>().InteractWith(interactable, thing);
                         ThingsImDoing.RemoveAt(0);
                         ThingsImDoing.Add(new ThingToDo() { what = Things.waitfortask });
                     }
@@ -127,6 +127,7 @@ public class DoThing : MonoBehaviour
         public Vector2 where;
         public GameObject who;
         public float distance;
+        public int number;
     }
 
     public enum Things

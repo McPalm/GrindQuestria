@@ -12,20 +12,20 @@ public class Interactor : NetworkBehaviour
     double startTime;
     [SyncVar]
     double endTime;
-    Vector3 where;
+    DoThing.ThingToDo info;
 
     public float Progress => (float)((NetworkTime.time - startTime) / (endTime - startTime));
 
-    public void InteractWith(IInteractable target, Vector3 worldPosition)
+    public void InteractWith(IInteractable target, DoThing.ThingToDo info)
     {
         if (target.ValidTarget)
         {
             startTime = NetworkTime.time;
-            endTime = NetworkTime.time + target.TimeToComplete(worldPosition);
+            endTime = NetworkTime.time + target.TimeToComplete(info);
             this.target = target;
             Busy = true;
             GetComponent<Animator>().SetBool("Working", true);
-            where = worldPosition;
+            this.info = info;
         }
     }
 
@@ -55,7 +55,7 @@ public class Interactor : NetworkBehaviour
     void CompleteTask()
     {
         GetComponent<Animator>().SetBool("Working", false);
-        target.Interact(gameObject, where);
+        target.Interact(gameObject, info);
         Busy = false;
     }
 }

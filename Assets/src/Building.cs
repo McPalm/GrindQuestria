@@ -6,8 +6,7 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu, System.Serializable]
 public class Building : ScriptableObject
 {
-    public Item[] materials;
-    public int[] materialsQTY;
+    public ItemBundle[] materials;
     public TileBase tile;
     public TileLayer tileLayer;
 }
