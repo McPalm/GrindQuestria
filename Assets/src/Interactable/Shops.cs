@@ -25,9 +25,9 @@ public class Shops : NetworkBehaviour, IInteractable
         if (recepie == null)
             return;
         var inventory = user.GetComponent<Inventory>();
-        if(inventory.HasBundles(recepie.Ingredients))
+        if(inventory.HasBundles(recepie.Materials))
         {
-            inventory.RemoveBundles(recepie.Ingredients);
+            inventory.RemoveBundles(recepie.Materials);
             inventory.AddBundles(recepie.Product);
         }
         else
@@ -36,7 +36,7 @@ public class Shops : NetworkBehaviour, IInteractable
         }
     }
 
-    public float TimeToComplete(DoThing.ThingToDo info) => 1f;
+    public float TimeToComplete(DoThing.ThingToDo info) => RecepieFor(info).craftTime * ShopAt(info).craftTimeMultiplier;
     
     void Awake()
     {
@@ -61,6 +61,7 @@ public class Shops : NetworkBehaviour, IInteractable
         return null;
     }
 
+    ShopData ShopAt(DoThing.ThingToDo info) => ShopAt(WallTilemap.WorldToCell(info.where));
     ShopData ShopAt(Vector3Int position)
     {
         var tile = WallTilemap.GetTile(position);

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3f1a72e0d518a48a216ad42b17f9b6, type: 3}
   m_Name: R_Planks
   m_EditorClassIdentifier: 
-  Produce: {fileID: 11400000, guid: 7acba2b6540f93d4193d620d5befe284, type: 2}
-  ProduceQTY: 8
+  Product:
+    item: {fileID: 11400000, guid: 7acba2b6540f93d4193d620d5befe284, type: 2}
+    qty: 8
   Ingredients:
-  - {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
-  IngredientsQTY: 01000000
+  - item: {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
+    qty: 1

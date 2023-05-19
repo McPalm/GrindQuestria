@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Floor_Wood
   m_EditorClassIdentifier: 
   materials:
-  - {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
-  materialsQTY: 01000000
-  tile: {fileID: 0}
+  - item: {fileID: 11400000, guid: 7acba2b6540f93d4193d620d5befe284, type: 2}
+    qty: 1
+  tile: {fileID: 11400000, guid: eda2945ae15dbfa40997f43270dee193, type: 2}
   tileLayer: 0

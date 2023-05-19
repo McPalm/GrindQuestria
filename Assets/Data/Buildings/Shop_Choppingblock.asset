@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Shop_Choppingblock
   m_EditorClassIdentifier: 
   materials:
-  - {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
-  - {fileID: 11400000, guid: 4cc8b5634beaee5429ec7709f00b41b2, type: 2}
-  materialsQTY: 0100000001000000
+  - item: {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
+    qty: 1
+  - item: {fileID: 11400000, guid: 4cc8b5634beaee5429ec7709f00b41b2, type: 2}
+    qty: 1
   tile: {fileID: 11400000, guid: ae910bf88d9552646b0d5a255ec6bd6c, type: 2}
   tileLayer: 1

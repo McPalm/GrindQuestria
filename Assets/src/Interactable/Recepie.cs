@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Recepie : ScriptableObject
 {
+    public float craftTime = 8f;
     public ItemBundle Product;
-    public ItemBundle[] Ingredients;
+    public ItemBundle[] Materials;
 }

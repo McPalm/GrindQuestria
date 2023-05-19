@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wall_Wood
   m_EditorClassIdentifier: 
   materials:
-  - {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
-  materialsQTY: 01000000
+  - item: {fileID: 11400000, guid: 7acba2b6540f93d4193d620d5befe284, type: 2}
+    qty: 4
   tile: {fileID: 11400000, guid: 4f365d4018f4f42469ba9557fd08caf5, type: 2}
   tileLayer: 1

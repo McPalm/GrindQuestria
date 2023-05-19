@@ -27,12 +27,12 @@ public class CraftMenuItemUI : MonoBehaviour
         productIcon.sprite = recepie.Product.item.sprite;
         for(int i = 0; i < materialIcon.Length; i++)
         {
-            if(i < recepie.Ingredients.Length)
+            if(i < recepie.Materials.Length)
             {
                 materialIcon[i].gameObject.SetActive(true);
                 materialQTY[i].gameObject.SetActive(true);
-                materialIcon[i].sprite = recepie.Ingredients[i].item.sprite;
-                materialQTY[i].text = $"x{recepie.Ingredients[i].qty}";
+                materialIcon[i].sprite = recepie.Materials[i].item.sprite;
+                materialQTY[i].text = $"x{recepie.Materials[i].qty}";
             }
             else
             {
