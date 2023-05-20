@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -488721925442295091
     second: Item_Plank
+  - first:
+      213: -7573354855677281409
+    second: Item_Brick
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -175,7 +178,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,6 +186,27 @@ TextureImporter:
       bones: []
       spriteID: dca21188ff5b739f0800000000000000
       internalID: -488721925442295091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Item_Brick
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7b306552e906e690800000000000000
+      internalID: -7573354855677281409
       vertices: []
       indices: 
       edges: []

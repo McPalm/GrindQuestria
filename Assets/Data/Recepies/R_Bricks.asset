@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db3f1a72e0d518a48a216ad42b17f9b6, type: 3}
-  m_Name: R_Planks
+  m_Name: R_Bricks
   m_EditorClassIdentifier: 
-  craftTime: 8
+  craftTime: 1
   Product:
-    item: {fileID: 11400000, guid: 7acba2b6540f93d4193d620d5befe284, type: 2}
+    item: {fileID: 11400000, guid: e57cf2d35b4feac4fb00fdef5d96a007, type: 2}
     qty: 8
   Materials:
-  - item: {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
+  - item: {fileID: 11400000, guid: 4cc8b5634beaee5429ec7709f00b41b2, type: 2}
     qty: 1

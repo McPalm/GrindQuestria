@@ -51,17 +51,20 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: -7573354855677281409, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
   - {fileID: 8033092973025764044, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
   - {fileID: -488721925442295091, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
   - {fileID: 4337684191699249041, guid: 3493a820b9015c24eb8e4c2cf2276cef, type: 3}
   - {fileID: -4637172546458061636, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -4458388979400810444, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: -1733739152878373738, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -2860982009417361707, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: 833101472512629755, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -8314697479797604436, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -8560909203809222747, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: 9158922217335370285, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -2913927307954446974, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: 4546089718011649171, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -38647862416911262, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -5779282676337348671, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -6337999885091750218, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
@@ -97,17 +100,20 @@ SpriteAtlas:
   - {fileID: 8201306870598886722, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
   - {fileID: -7908359208127360021, guid: f85ac8b8b87743f43b352a83474a2038, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Item_Brick
   - Items_0
   - Item_Plank
   - Items_Rock
   - doorframe
   - Terrain_16
+  - Terrain_17
   - Terrain_14
   - Terrain_15
   - Terrain_12
   - Terrain_13
   - Terrain_10
   - Terrain_11
+  - Terrain_18
   - floor_planks
   - Terrain_3
   - Terrain_2

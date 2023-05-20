@@ -53,6 +53,12 @@ TextureImporter:
   - first:
       213: -4458388979400810444
     second: Terrain_16
+  - first:
+      213: -1733739152878373738
+    second: Terrain_17
+  - first:
+      213: 4546089718011649171
+    second: Terrain_18
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -511,7 +517,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -519,6 +525,48 @@ TextureImporter:
       bones: []
       spriteID: 4306c4448de9022c0800000000000000
       internalID: -4458388979400810444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Terrain_17
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 85
+        width: 16
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6947f7b1d6580f7e0800000000000000
+      internalID: -1733739152878373738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Terrain_18
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39cd3272384f61f30800000000000000
+      internalID: 4546089718011649171
       vertices: []
       indices: 
       edges: []

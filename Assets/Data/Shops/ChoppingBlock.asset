@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0475f60b001357d42894674e34b123ef, type: 3}
   m_Name: ChoppingBlock
   m_EditorClassIdentifier: 
+  craftTimeMultiplier: 1.75
   displayName: Chopping Block
   Recepies:
   - {fileID: 11400000, guid: af6f6c162436ebb409cb4b6ea053a5a9, type: 2}
+  - {fileID: 11400000, guid: 1ca6ea580a8fcc246ab9898359382175, type: 2}
   Tile: {fileID: 11400000, guid: ae910bf88d9552646b0d5a255ec6bd6c, type: 2}
