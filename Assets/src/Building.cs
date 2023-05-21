@@ -4,12 +4,17 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu, System.Serializable]
-public class Building : ScriptableObject
+public class Building : ScriptableObject, ICraftMenuItem
 {
+    public string displayName;
     public ItemBundle[] materials;
-    public TileBase tile;
+    public BuildingTile tile;
     public TileLayer tileLayer;
     public Category category;
+
+    public string ProductName => displayName;
+    public Sprite ProductSprite => tile.sprite;
+    public IEnumerable<ItemBundle> Materials => materials;
 
     public enum Category
     {

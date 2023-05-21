@@ -57,21 +57,50 @@ public class BlueprintEditor : MonoBehaviour
 
     public void SetTileFromPalette(int paletteSlot)
     {
-        Sample = tilePalette[paletteSlot];
-        for (int i = 0; i < hotKeys.buttons.Length; i++)
+        if (Sample == tilePalette[paletteSlot])
+            PickTile(paletteSlot);
+        else
         {
-            hotKeys.buttons[i].GetComponentsInChildren<UnityEngine.UI.Image>(true)[1].enabled = paletteSlot == i; ;
+            Sample = tilePalette[paletteSlot];
+            for (int i = 0; i < hotKeys.buttons.Length; i++)
+            {
+                hotKeys.buttons[i].GetComponentsInChildren<UnityEngine.UI.Image>(true)[1].enabled = paletteSlot == i; ;
+            }
         }
     }
 
     public void PickTile(int paletteSlot)
     {
-        // open the tile interface
-        // 
+        Building.Category category = (Building.Category)paletteSlot;
+
+        var client = new CraftMenyClient()
+        {
+            CraftMenuTitle = "Building",
+            buildings = BuildingCollection.Instance.GetBuildings(category),
+            OnPick = SetTileInPalette,
+        };
+        FindObjectOfType<CraftMenuUI>().Open(client, client.PickBuilding);
     }
 
-    public void SetTileInPalette(int paletteSlot, TileBase tile)
+    public void SetTileInPalette(Building building)
     {
+        int slot = (int)building.category;
+        Sample = building.tile;
+        tilePalette[slot] = building.tile;
+        FindObjectOfType<CraftMenuUI>().Close();
+        hotKeys.buttons[slot].GetComponentsInChildren<UnityEngine.UI.Image>(true)[2].sprite = building.ProductSprite;
+    }
 
+    private class CraftMenyClient : ICraftMenuClient
+    {
+        public string CraftMenuTitle {get; set;}
+        public Building[] buildings;
+        public IEnumerable<ICraftMenuItem> Items => buildings;
+        public System.Action<Building> OnPick;
+
+        public void PickBuilding(int index)
+        {
+            OnPick(buildings[index]);
+        }
     }
 }

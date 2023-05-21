@@ -6,8 +6,8 @@ using UnityEngine;
 //[CreateAssetMenu]
 public class BuildingCollection : ScriptableObjectCollection<Building>
 {
-    BuildingCollection instance;
-    public BuildingCollection Instance
+    static BuildingCollection instance;
+    static public BuildingCollection Instance
     {
         get
         {
@@ -18,6 +18,19 @@ public class BuildingCollection : ScriptableObjectCollection<Building>
             }
             return instance;
         }
+    }
+
+    public Building[] GetBuildings(Building.Category category)
+    {
+        switch(category)
+        {
+            case Building.Category.wall: return Walls;
+            case Building.Category.floor: return Floors;
+            case Building.Category.door: return Doors;
+            case Building.Category.shop: return Shops;
+            case Building.Category.furniture: return Furniture;
+        }
+        throw new System.Exception($"{category} is not a valid category");
     }
 
     Building[] Walls;
