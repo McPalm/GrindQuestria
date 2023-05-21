@@ -13,21 +13,22 @@ public class CraftMenuUI : MonoBehaviour
     List<CraftMenuItemUI> menuItemUIs;
     public TextMeshProUGUI shopLabel;
 
-    public void Open(ShopData shop, System.Action<int> OnClick)
+    public void Open(ICraftMenuClient shop, System.Action<int> OnClick)
     {
         gameObject.SetActive(true);
         Background.SetActive(true);
-        shopLabel.text = shop.displayName;
-        int count = Mathf.Max(shop.Recepies.Length, menuItemUIs.Count);
-        for (int i = 0; i < count; i++)
+        shopLabel.text = shop.CraftMenuTitle;
+        int count = 0;
+        foreach(var item in shop.Items)
         {
-            var menuItem = GetOrCreate(i);
-            int capture = i;
-            if (i < shop.Recepies.Length)
-                menuItem.OpenRecepie(shop.Recepies[i], () => OnClick(capture));
-            else
-                menuItem.gameObject.SetActive(false);
+            var menuItem = GetOrCreate(count);
+            menuItem.gameObject.SetActive(true);
+            int capture = count;
+            menuItem.OpenRecepie(item, () => OnClick(capture));
+            count++;
         }
+        for(int i = count; i < menuItemUIs.Count; i++)
+            menuItemUIs[i].gameObject.SetActive(false);
     }
 
     void Update()

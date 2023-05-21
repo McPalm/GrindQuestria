@@ -55,12 +55,23 @@ public class BlueprintEditor : MonoBehaviour
         }
     }
 
-    public void SetTileFromPalette(int tile)
+    public void SetTileFromPalette(int paletteSlot)
     {
-        Sample = tilePalette[tile];
+        Sample = tilePalette[paletteSlot];
         for (int i = 0; i < hotKeys.buttons.Length; i++)
         {
-            hotKeys.buttons[i].GetComponentsInChildren<UnityEngine.UI.Image>(true)[1].enabled = tile == i; ;
+            hotKeys.buttons[i].GetComponentsInChildren<UnityEngine.UI.Image>(true)[1].enabled = paletteSlot == i; ;
         }
+    }
+
+    public void PickTile(int paletteSlot)
+    {
+        // open the tile interface
+        // 
+    }
+
+    public void SetTileInPalette(int paletteSlot, TileBase tile)
+    {
+
     }
 }
