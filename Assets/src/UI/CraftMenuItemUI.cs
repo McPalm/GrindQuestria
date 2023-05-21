@@ -20,25 +20,23 @@ public class CraftMenuItemUI : MonoBehaviour
 
     void ClickListenerer() => OnClick?.Invoke();
 
-    public void OpenRecepie(Recepie recepie, System.Action onClick)
+    public void OpenRecepie(ICraftMenuItem recepie, System.Action onClick)
     {
         OnClick = onClick;
         displayName.text = recepie.Product.item.displayName;
         productIcon.sprite = recepie.Product.item.sprite;
-        for(int i = 0; i < materialIcon.Length; i++)
+        foreach (var icon in materialIcon)
+            icon.gameObject.SetActive(false);
+        foreach (var qty in materialQTY)
+            qty.gameObject.SetActive(false);
+        int count = 0;
+        foreach (var material in recepie.Materials)
         {
-            if(i < recepie.Materials.Length)
-            {
-                materialIcon[i].gameObject.SetActive(true);
-                materialQTY[i].gameObject.SetActive(true);
-                materialIcon[i].sprite = recepie.Materials[i].item.sprite;
-                materialQTY[i].text = $"x{recepie.Materials[i].qty}";
-            }
-            else
-            {
-                materialIcon[i].gameObject.SetActive(false);
-                materialQTY[i].gameObject.SetActive(false);
-            }
+            materialIcon[count].gameObject.SetActive(true);
+            materialQTY[count].gameObject.SetActive(true);
+            materialIcon[count].sprite = material.item.sprite;
+            materialQTY[count].text = $"x{material.qty}";
+            count++;
         }
     }
 }
