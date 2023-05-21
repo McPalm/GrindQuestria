@@ -19,3 +19,4 @@ MonoBehaviour:
     qty: 1
   tile: {fileID: 11400000, guid: ae910bf88d9552646b0d5a255ec6bd6c, type: 2}
   tileLayer: 1
+  category: 3
