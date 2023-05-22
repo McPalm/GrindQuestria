@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: -657227314254129134}
   - component: {fileID: 7858690007435021444}
   - component: {fileID: -5583950373411030871}
+  - component: {fileID: -3904792705417996840}
   m_Layer: 8
   m_Name: Pony
   m_TagString: Untagged
@@ -126,7 +127,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4090559553482031171
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -139,10 +140,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7969711567662507020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +319,21 @@ MonoBehaviour:
     tail_r: 0
     tail_g: 0
     tail_b: 0
+--- !u!114 &-3904792705417996840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090559553482031170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9aff5955f383af43909674d3fa1a707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &4090559553729590636
 GameObject:
   m_ObjectHideFlags: 0

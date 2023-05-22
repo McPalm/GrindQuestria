@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -2079445754859412247}
   - component: {fileID: -2896274573802713630}
   - component: {fileID: 3093175953592895204}
+  - component: {fileID: 7360162373213887548}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -66,7 +67,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  PlayerObject: {fileID: 4090559553482031170, guid: df8465a41e7ef004d919f563875a834b, type: 3}
   MyCharacter: {fileID: 0}
 --- !u!114 &-2896274573802713630
 MonoBehaviour:
@@ -93,6 +93,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 453aeecb0dc961c429cef2c1ee1099c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+--- !u!114 &7360162373213887548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2477496799937149606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39eea0d690275b849af99ea95a9a32a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0

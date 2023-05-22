@@ -18,8 +18,8 @@ public class Interactor : NetworkBehaviour
 
     public void InteractWith(IInteractable target, DoThing.ThingToDo info)
     {
-        var validate = target.ValidateUse(gameObject, info);
-        if (validate.canUse)
+        var (canUse, failmessage) = target.ValidateUse(gameObject, info);
+        if (canUse)
         {
             startTime = NetworkTime.time;
             endTime = NetworkTime.time + target.TimeToComplete(info);
@@ -30,7 +30,7 @@ public class Interactor : NetworkBehaviour
         }
         else
         {
-            Debug.Log(validate.failmessage);
+            GameMessages.Instance.FeedbackMessage(gameObject, failmessage);
         }
     }
 

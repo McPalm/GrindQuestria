@@ -16,6 +16,8 @@ public class NetInput : NetworkBehaviour
             var player = CharacterRegistry.Instance.GetCharacter();
             MyCharacter = player;
             player.GetComponent<DoThing>().enabled = true;
+            var identity = GetComponent<NetworkIdentity>();
+            player.GetComponent<NetCharacterID>().Connection = identity.connectionToClient;
         }
         if(isLocalPlayer)
         {
