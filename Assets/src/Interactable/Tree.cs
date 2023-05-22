@@ -55,4 +55,10 @@ public class Tree : NetworkBehaviour, IInteractable
     }
 
     public Vector2 GetInteractLocation(Vector3 where) => transform.position + new Vector3(0f, -.25f, 0f);
+
+    public (bool canUse, string failmessage) ValidateUse(GameObject user, DoThing.ThingToDo info)
+    {
+        Debug.LogWarning("Deprechiated class");
+        return (true, null);
+    }
 }

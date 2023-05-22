@@ -9,5 +9,6 @@ public interface IInteractable
     void Interact(GameObject user, DoThing.ThingToDo info);
     float TimeToComplete(DoThing.ThingToDo info);
     Vector2 GetInteractLocation(Vector3 worldPosition);
+    (bool canUse, string failmessage) ValidateUse(GameObject user, DoThing.ThingToDo info);
 }
 

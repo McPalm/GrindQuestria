@@ -72,4 +72,15 @@ public class Shops : NetworkBehaviour, IInteractable
                 return shop;
         return null;
     }
+
+    public (bool canUse, string failmessage) ValidateUse(GameObject user, DoThing.ThingToDo info)
+    {
+        var inventory = user.GetComponent<Inventory>();
+        var shop = ShopAt(info);
+        var recepie = shop.Recepies[info.number];
+        if (false == inventory.HasBundles(recepie.Materials))
+            return (false, "Missing Materials");
+        // TODO: Check if already in use
+        return (true, null);
+    }
 }

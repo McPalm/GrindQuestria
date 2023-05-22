@@ -18,7 +18,8 @@ public class Interactor : NetworkBehaviour
 
     public void InteractWith(IInteractable target, DoThing.ThingToDo info)
     {
-        if (target.ValidTarget)
+        var validate = target.ValidateUse(gameObject, info);
+        if (validate.canUse)
         {
             startTime = NetworkTime.time;
             endTime = NetworkTime.time + target.TimeToComplete(info);
@@ -26,6 +27,10 @@ public class Interactor : NetworkBehaviour
             Busy = true;
             GetComponent<Animator>().SetBool("Working", true);
             this.info = info;
+        }
+        else
+        {
+            Debug.Log(validate.failmessage);
         }
     }
 

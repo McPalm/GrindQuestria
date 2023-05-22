@@ -91,4 +91,28 @@ public class Blueprint : MonoBehaviour, IInteractable
         }
         return true;
     }
+
+    public Building BuildingAt(Vector3 position)
+    {
+        var tile = blueprintTilemap.GetTile(position);
+        if(tile is BuildingTile)
+        {
+            var bTile = tile as BuildingTile;
+            return bTile.building;
+        }
+        return null;
+    }
+
+    public (bool canUse, string failmessage) ValidateUse(GameObject user, DoThing.ThingToDo info)
+    {
+        var inventory = user.GetComponent<Inventory>();
+        var building = BuildingAt(info.where);
+        if (building == null)
+            return (false, "No Building There");
+        if (false == inventory.HasBundles(building.materials))
+            return (false, "Missing Materials");
+
+        // TODO: Check if already in use
+        return (true , null);
+    }
 }
