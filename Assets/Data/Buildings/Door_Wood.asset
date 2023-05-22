@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22986f90ee5ed9342baaaa99aecf6797, type: 3}
   m_Name: Door_Wood
   m_EditorClassIdentifier: 
+  displayName: Wood Door
   materials:
   - item: {fileID: 11400000, guid: 7acba2b6540f93d4193d620d5befe284, type: 2}
     qty: 2

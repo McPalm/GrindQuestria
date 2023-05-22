@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22986f90ee5ed9342baaaa99aecf6797, type: 3}
   m_Name: Wall_Brick
   m_EditorClassIdentifier: 
+  displayName: Brick Wall
   materials:
   - item: {fileID: 11400000, guid: e57cf2d35b4feac4fb00fdef5d96a007, type: 2}
-    qty: 1
+    qty: 4
   tile: {fileID: 11400000, guid: 0b8707e757bbe434682a331c6ca98bc5, type: 2}
   tileLayer: 1
+  category: 0
