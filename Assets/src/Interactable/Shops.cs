@@ -61,6 +61,8 @@ public class Shops : NetworkBehaviour, IInteractable
         return null;
     }
 
+    public bool HasShopHere(Vector3 position) => ShopAt(position);
+    ShopData ShopAt(Vector3 position) => ShopAt(WallTilemap.WorldToCell(position));
     ShopData ShopAt(DoThing.ThingToDo info) => ShopAt(WallTilemap.WorldToCell(info.where));
     ShopData ShopAt(Vector3Int position)
     {
@@ -83,4 +85,5 @@ public class Shops : NetworkBehaviour, IInteractable
         // TODO: Check if already in use
         return (true, null);
     }
+
 }

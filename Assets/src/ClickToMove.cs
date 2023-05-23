@@ -16,37 +16,45 @@ public class ClickToMove : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
             var clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (NaturalResources.Instance.HasResourcesHere(clickPos))
+            {
+                Interact(NaturalResources.Instance, clickPos, NaturalResources.Instance.gameObject);
+                return;
+            }
+            if (Shops.Instance.HasShopHere(clickPos))
+            {
+                WalkHere(clickPos);
+                netInput.OpenShop(clickPos);
+                return;
+            }
             var clickedInteractable = Physics2D.Raycast(clickPos, Vector2.zero, 0f, InteractionLayer);
             if (clickedInteractable)
             {
                 var interactable = clickedInteractable.transform.GetComponent<IInteractable>();
-                if (interactable != null) // shop
-                {
-                    netInput.DoThing(new DoThing.ThingToDo()
-                    {
-                        what = DoThing.Things.interact,
-                        who = clickedInteractable.transform.gameObject,
-                        where = clickPos,
-                    });
-                }
-                else
-                {
-                    netInput.DoThing(new DoThing.ThingToDo()
-                    {
-                        what = DoThing.Things.walkhere,
-                        where = clickPos,
-                    });
-                    netInput.OpenShop(clickPos);
-                }
+                Interact(interactable, clickPos, clickedInteractable.transform.gameObject);
+                return;
             }
-            else
-            {
-                netInput.DoThing(new DoThing.ThingToDo()
-                {
-                    what = DoThing.Things.walkhere,
-                    where = clickPos,
-                });
-            }
+
+            WalkHere(clickPos);
         }
+    }
+
+    void Interact(IInteractable interactable, Vector2 clickPos, GameObject gameObject)
+    {
+        netInput.DoThing(new DoThing.ThingToDo()
+        {
+            what = DoThing.Things.interact,
+            who = gameObject,
+            where = clickPos,
+        });
+    }
+
+    void WalkHere(Vector2 clickPos)
+    {
+        netInput.DoThing(new DoThing.ThingToDo()
+        {
+            what = DoThing.Things.walkhere,
+            where = clickPos,
+        });
     }
 }

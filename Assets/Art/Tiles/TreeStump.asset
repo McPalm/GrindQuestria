@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92eab6222360b354ba037a00571a4cb5, type: 3}
-  m_Name: Rock
+  m_Name: TreeStump
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 2058049638561703503, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  m_DefaultSprite: {fileID: 7642980859614939925, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 0
   NeighborHash: 0
   m_TilingRules: []
-  breakTime: 1
-  displayName: Rock
+  breakTime: 7
+  displayName: 
   Drops:
-  - item: {fileID: 11400000, guid: 4cc8b5634beaee5429ec7709f00b41b2, type: 2}
-    qty: 5
-  skill: 1
+  - item: {fileID: 11400000, guid: f33dc10897dacdf4aa2f32679f688870, type: 2}
+    qty: 1
+  skill: 0
   breaksInto: {fileID: 0}

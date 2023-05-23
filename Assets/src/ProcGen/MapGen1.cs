@@ -9,8 +9,8 @@ public class MapGen1 : MonoBehaviour
     public int size = 200;
     public TileBase Grass1;
     public TileBase Grass2;
-    public GameObject Tree;
-    public GameObject Rock;
+    public TileBase Tree;
+    public TileBase Rock;
 
 
     // Utility
@@ -71,16 +71,15 @@ public class MapGen1 : MonoBehaviour
 
     IEnumerator PlaceTrees()
     {
+        var tilemap = GridManager.instance.Walls.GetComponent<Tilemap>();
         void A(int i)
         {
             if (IsAvailable(Cell(i)))
             {
                 if (SquareDistanceFromCenter(i) > 100f && heightMap[i] - Random.value < -.7f && Random.value < .3f)
                 {
-                    // place tree
-                    var o = Instantiate(Tree, Cell(i) + new Vector3(Random.value, Random.value), Quaternion.identity);
-                    NetworkServer.Spawn(o);
-                    ClaimRadius(Cell(i));
+                    tilemap.SetTile(Cell(i), Tree);
+                    ClaimSpot(Cell(i));
                 }
             }
         }
@@ -89,14 +88,14 @@ public class MapGen1 : MonoBehaviour
 
     IEnumerator PlaceRocks()
     {
+        var tilemap = GridManager.instance.Walls.GetComponent<Tilemap>();
         void A(int i)
         {
             if(IsAvailable(Cell(i)))
             {
                 if(SquareDistanceFromCenter(i) > 100f && (heightMap[i] + Random.value) > 0f && Random.value < .01f)
                 {
-                    var o = Instantiate(Rock, Cell(i) + new Vector3(Random.value, Random.value), Quaternion.identity);
-                    NetworkServer.Spawn(o);
+                    tilemap.SetTile(Cell(i), Rock);
                     ClaimSpot(Cell(i));
                 }
             }
