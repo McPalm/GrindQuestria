@@ -74,6 +74,9 @@ SpriteAtlas:
   - {fileID: -6537453368205885854, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: -3932762474534642510, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
   - {fileID: 1404196382344981941, guid: 026ad7746c2fd4947b030399091f561f, type: 3}
+  - {fileID: -6895716492971166485, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: -2746839580606631015, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
+  - {fileID: 5372264662783423788, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   - {fileID: 7642980859614939925, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   - {fileID: -174804484191063705, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
   - {fileID: 3275407576765064038, guid: f93fbb95d0066b843a79b6d1a365e135, type: 3}
@@ -123,6 +126,9 @@ SpriteAtlas:
   - dooropen
   - floor_planks2
   - doorclosed
+  - Objects_8
+  - Objects_6
+  - Objects_7
   - Objects_0
   - Objects_1
   - Objects_2
