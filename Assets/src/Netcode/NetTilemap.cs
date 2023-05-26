@@ -8,21 +8,13 @@ using static UnityEngine.Tilemaps.Tilemap;
 [RequireComponent(typeof(Tilemap))]
 public class NetTilemap : NetworkBehaviour
 {
-    Tilemap tilemap;
-
-    Tilemap Tilemap { get
-        {
-            /*
-            if (tilemap == null)
-                tilemap = GetComponent<Tilemap>();
-            */
-            return tilemap;
-        }
-    }
+    Tilemap Tilemap { get; set; }
+    Vector3 center;
 
     private void Awake()
     {
-        tilemap = GetComponent<Tilemap>();
+        Tilemap = GetComponent<Tilemap>();
+        center = Tilemap.GetLayoutCellCenter();
     }
 
     public void SetTile(Vector3 worldPosition, TileBase tile) => SetTile(Tilemap.WorldToCell(worldPosition), tile);
@@ -86,9 +78,10 @@ public class NetTilemap : NetworkBehaviour
     }
 
     public Vector3Int WorldToCell(Vector3 worldPosition) => Tilemap.WorldToCell(worldPosition);
-    public Vector3 CellToWorld(Vector3Int cellPosition) => Tilemap.CellToWorld(cellPosition);
+    public Vector3 CellToWorld(Vector3Int cellPosition) => Tilemap.CellToWorld(cellPosition) + center;
     public TileBase GetTile(Vector3Int cellPosition) => Tilemap.GetTile(cellPosition);
     public TileBase GetTile(Vector3 worldPosition) => GetTile(WorldToCell(worldPosition));
+    public Vector3 CenterOf(Vector3 worldPosition) => Tilemap.CellToWorld(Tilemap.WorldToCell(worldPosition)) + center;
 
     BoundsInt GetBoundsAround(Vector3Int center) => new BoundsInt(center - new Vector3Int(20, 20, 0), new Vector3Int(40, 40, 1));
 }

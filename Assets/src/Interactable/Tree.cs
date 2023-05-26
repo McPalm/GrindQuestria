@@ -54,7 +54,7 @@ public class Tree : NetworkBehaviour, IInteractable
             GetChopped(user);
     }
 
-    public Vector2 GetInteractLocation(Vector3 where) => transform.position + new Vector3(0f, -.25f, 0f);
+    public Vector2 GetInteractLocation(Vector3 where) => throw new System.Exception("Obsolete function");
 
     public (bool canUse, string failmessage) ValidateUse(GameObject user, DoThing.ThingToDo info)
     {

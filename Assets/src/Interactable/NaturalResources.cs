@@ -21,7 +21,7 @@ public class NaturalResources : NetworkBehaviour, IInteractable
 
     public Vector2 GetInteractLocation(Vector3 worldPosition)
     {
-        return Walls.CellToWorld(Walls.WorldToCell(worldPosition));
+        return Walls.CenterOf(worldPosition);
     }
 
     public void Interact(GameObject user, DoThing.ThingToDo info)

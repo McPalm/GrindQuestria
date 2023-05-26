@@ -23,7 +23,7 @@ public class Blueprint : MonoBehaviour, IInteractable
 
     public Vector2 GetInteractLocation(Vector3 worldPosition)
     {
-        return blueprintTilemap.CellToWorld(blueprintTilemap.WorldToCell(worldPosition)) + new Vector3(.5f, .5f, 0f);
+        return blueprintTilemap.CellToWorld(blueprintTilemap.WorldToCell(worldPosition));
     }
 
     public void Interact(GameObject user, DoThing.ThingToDo info)

@@ -16,7 +16,7 @@ public class Shops : NetworkBehaviour, IInteractable
 
     public Vector2 GetInteractLocation(Vector3 worldPosition)
     {
-        return WallTilemap.CellToWorld(WallTilemap.WorldToCell(worldPosition));
+        return WallTilemap.CenterOf(worldPosition);
     }
 
     public void Interact(GameObject user, DoThing.ThingToDo info)
