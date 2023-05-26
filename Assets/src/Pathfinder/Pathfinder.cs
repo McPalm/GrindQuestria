@@ -10,7 +10,7 @@ public class Pathfinder : MonoBehaviour
     public List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)
     {
         if (!NavMesh.HasNode(goal))
-            return null;
+            throw new System.Exception("Goal does not exist in the grid");
         var openSet = new List<Vector3Int>();
         var closedSet = new HashSet<Vector3Int>();
         var GValue = new Dictionary<Vector3Int, int>(); // lowest cost to get there

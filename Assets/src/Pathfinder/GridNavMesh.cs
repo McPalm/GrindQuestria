@@ -7,6 +7,12 @@ public class GridNavMesh : MonoBehaviour, INavMesh
 {
     // editor
     public Tilemap walls;
+    TilemapCollider2D wallCollider;
+
+    void Start()
+    {
+        wallCollider = walls.GetComponent<TilemapCollider2D>();
+    }
 
     // private
     Dictionary<Vector3Int, Node> nodes = new Dictionary<Vector3Int, Node>();
@@ -29,20 +35,18 @@ public class GridNavMesh : MonoBehaviour, INavMesh
         return ret;
     }
 
+    public bool HasNode(Vector2 position)
+    {
+        return !wallCollider.OverlapPoint(position);
+    }
+
     public bool HasNode(Vector3Int position)
     {
-        return IsAccessible(position);
+        return HasNode((Vector2)walls.CellToWorld(position) + new Vector2(.5f, .5f));
     }
 
     bool IsAccessible(Vector3Int position)
     {
-        var tile = walls.GetTile(position);
-        if (tile == null)
-            return true;
-        if(tile is BuildingTile)
-        {
-            return ((BuildingTile)tile).colliderType == Tile.ColliderType.None;
-        }
-        return false;
+        return HasNode((Vector2)walls.CellToWorld(position) + new Vector2(.5f, .5f));
     }
 }
