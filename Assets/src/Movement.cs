@@ -22,6 +22,8 @@ public class Movement : NetworkBehaviour
     public bool Running;
     Animator animator;
     Rigidbody2D body;
+    float stuckTime = 0f;
+    public bool IsStuck => stuckTime > .5f;
 
     float facing = -1f;
 
@@ -67,9 +69,11 @@ public class Movement : NetworkBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(isServer)
+        stuckTime = transform.position == position ? 0f : stuckTime + Time.fixedDeltaTime;
+
+        if (isServer)
             position = transform.position;
-        if(direction != Vector2.zero)
+        if (direction != Vector2.zero)
         {
             if (Mathf.Sign(direction.x) != facing)
             {

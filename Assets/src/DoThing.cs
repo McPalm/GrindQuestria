@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DoThing : MonoBehaviour
 {
@@ -31,13 +32,19 @@ public class DoThing : MonoBehaviour
         if (!Idle && ThingsImDoing[0].what == Things.waitfortask)
             interactor.Cancel();
         ThingsImDoing.Clear();
-        ThingsImDoing.Add(thing);
+        QueueThingToDo(thing);
         Path = null;
     }
 
     public void QueueThingToDo(ThingToDo thing)
     {
         ThingsImDoing.Add(thing);
+    }
+
+
+    public void InsertThingTodo(ThingToDo thing)
+    {
+        ThingsImDoing.Insert(0, thing);
     }
 
     private void FixedUpdate()
@@ -48,22 +55,31 @@ public class DoThing : MonoBehaviour
             switch (thing.what)
             {
                 case Things.walkhere:
-                    // if distance is futher than 1.5 and we have no clear path, use pathfinder.
                     var delta = thing.where - (Vector2)transform.position;
-                    if (delta.sqrMagnitude < thing.distance * thing.distance)
+                    bool inrange = false;
+                    if (ThingsImDoing.Count > 1 && ThingsImDoing[1].what == Things.interact)
+                        inrange = InRangeOfTask(ThingsImDoing[1]);
+                    else
+                        inrange = delta.sqrMagnitude < thing.distance * thing.distance;
+
+                    if (inrange)
                         ThingsImDoing.RemoveAt(0);
                     else if (delta.sqrMagnitude > 2.25f && GotClearPath(thing.where) == false)
                         PathTo(thing.where);
                     else
                         movement.Direction = delta * 2f;
+                    if (movement.IsStuck)
+                        ThingsImDoing.RemoveAt(0);
                     break;
                 case Things.pathhere:
                     if (Path == null)
                     {
                         Path = FindPath(thing.where);
                         currentNode = 0;
-                        if(Path == null)
-                            ThingsImDoing.RemoveAt(0);
+                        if (Path == null)
+                        {
+                            ThingsImDoing.Clear();
+                        }
                         break;
                     }
                     // see if we can skip a node due to having a clear path to the next
@@ -79,16 +95,26 @@ public class DoThing : MonoBehaviour
                         ThingsImDoing.RemoveAt(0);
                         break;
                     }
+                    // if we approching something and get in range, end the pathfinder
+                    if(ThingsImDoing.Count > 2 && ThingsImDoing[2].what == Things.interact && InRangeOfTask(ThingsImDoing[2]))
+                    { 
+                        Path = null;
+                        ThingsImDoing.RemoveAt(0);
+                        break;
+                    }
+
                     // go to the next node in the path
-                    delta = (Vector2)walls.CellToWorld(Path[currentNode]) + new Vector2(.5f, .5f) - (Vector2)transform.position;
+                    delta = (Vector2)walls.CellToWorld(Path[currentNode]) - (Vector2)transform.position;
 
                     movement.Direction = delta * 2f;
+                    if (movement.IsStuck)
+                    {
+                        ThingsImDoing.RemoveAt(0);
+                    }
                     break;
                 case Things.interact:
                     var interactable = thing.who.GetComponent<IInteractable>();
-                    var distance = interactable.MinimumDistance;
-                    var inRange = (interactable.GetInteractLocation(thing.where) - (Vector2)transform.position).sqrMagnitude <= distance * distance;
-                    if (inRange)
+                    if (InRangeOfTask(thing))
                     {
                         movement.Direction = Vector2.zero;
                         GetComponent<Interactor>().InteractWith(interactable, thing);
@@ -96,7 +122,7 @@ public class DoThing : MonoBehaviour
                         ThingsImDoing.Add(new ThingToDo() { what = Things.waitfortask });
                     }
                     else
-                        MoveCloser(interactable.GetInteractLocation(thing.where));
+                        MoveCloser(interactable.GetInteractLocation(walls.CenterOf(thing.where)));
                     break;
                 case Things.waitfortask:
                     if (interactor.Busy == false)
@@ -110,9 +136,16 @@ public class DoThing : MonoBehaviour
         }
     }
 
+    bool InRangeOfTask(ThingToDo thing)
+    {
+        var interactable = thing.who.GetComponent<IInteractable>();
+        var distance = interactable.MinimumDistance;
+        return (interactable.GetInteractLocation(thing.where) - (Vector2)transform.position).sqrMagnitude <= distance * distance;
+    }
+
     void MoveCloser(Vector2 where)
     {
-        ThingsImDoing.Insert(0, new ThingToDo()
+        InsertThingTodo(new ThingToDo()
         {
             what = Things.walkhere,
             where = where,
@@ -140,7 +173,7 @@ public class DoThing : MonoBehaviour
 
     void PathTo(Vector2 where)
     {
-        ThingsImDoing.Insert(0, new ThingToDo()
+        InsertThingTodo(new ThingToDo()
         {
             what = Things.pathhere,
             where = where,
@@ -159,8 +192,7 @@ public class DoThing : MonoBehaviour
                 return new List<Vector3Int>();
 
             to = adjacent;
-            v3i = walls.WorldToCell(to);
-            
+            v3i = walls.WorldToCell(to); 
         }
         // Can we cut straight to where we wish to go?
         if(GotClearPath(to))
