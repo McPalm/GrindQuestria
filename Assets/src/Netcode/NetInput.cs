@@ -31,7 +31,7 @@ public class NetInput : NetworkBehaviour
     void InitLocal()
     {
         FindObjectOfType<TaskProgressBar>().Target = MyCharacter.GetComponent<Interactor>();
-        FindObjectOfType<InventoryUI>().target = MyCharacter.GetComponent<Inventory>();
+        //FindObjectOfType<InventoryUI>().target = MyCharacter.GetComponent<Inventory>();
         FindObjectOfType<CameraFollow>().follow = MyCharacter.transform;
         FindObjectOfType<ClickToMove>().netInput = this;
         FindObjectOfType<BlueprintEditor>(includeInactive: true).NetInput = this;

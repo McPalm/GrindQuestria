@@ -27,6 +27,16 @@ public class ClickToMove : MonoBehaviour
                 netInput.OpenShop(clickPos);
                 return;
             }
+            if( Containers.Instance.HasContainerAt(clickPos))
+            {
+                netInput.DoThing(new DoThing.ThingToDo()
+                {
+                    what = DoThing.Things.interact,
+                    who = Containers.Instance.gameObject,
+                    where = Containers.Instance.GetInteractLocation(clickPos),
+                });
+                return;
+            }
             var clickedInteractable = Physics2D.Raycast(clickPos, Vector2.zero, 0f, InteractionLayer);
             if (clickedInteractable)
             {
