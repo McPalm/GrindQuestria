@@ -43,4 +43,10 @@ public class Containers : NetworkBehaviour, IInteractable
     {
         return tilemap.GetTile(position) == Crate;
     }
+
+    public void MoveItem(ItemBundle itemBundle, Container from, Container to)
+    {
+        from.RemoveItems(itemBundle);
+        to.AddItems(itemBundle);
+    }
 }
