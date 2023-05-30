@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
 
-public class Inventory : NetworkBehaviour
+public class Inventory : NetworkBehaviour, IContainer
 {
     const int SLOTS = 16;
 
     Item[] items;
     int[] stackSizes;
+
+    public event Action OnChange;
+
+    public int Count => FirstEmptyIndex();
 
     public Item GetItem(int index) => items[index];
     public int GetStackSize(int index) => stackSizes[index];
@@ -133,5 +138,19 @@ public class Inventory : NetworkBehaviour
             items[i] = ItemCollection.Instance.GetItem(itemIndexes[i]);
         }
         this.stackSizes = stackSizes;
+    }
+
+    public ItemBundle[] GetItems(int start, int length)
+    {
+        var bundles = new ItemBundle[Count];
+        for(int i = 0; i < bundles.Length; i++)
+        {
+            bundles[i] = new ItemBundle()
+            {
+                item = items[i],
+                qty = stackSizes[i],
+            };
+        }
+        return bundles;
     }
 }

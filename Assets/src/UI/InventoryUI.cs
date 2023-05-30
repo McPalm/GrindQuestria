@@ -6,23 +6,20 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    public ItemListUI ItemList;
     public Inventory target;
+    public GameObject background;
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        if (target)
+        if(Input.GetKeyDown(KeyCode.Tab))
         {
-            for (int i = 0; i < 16; i++)
+            if (background.activeSelf)
+                background.SetActive(false);
+            else
             {
-                int qty = target.GetStackSize(i);
-                Item item = target.GetItem(i);
-                transform.GetChild(i).gameObject.SetActive(target.GetStackSize(i) > 0);
-                if (qty > 0)
-                {
-                    transform.GetChild(i).GetComponent<Image>().sprite = item.sprite;
-                    transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = $"x{qty}";
-                }
+                background.SetActive(true);
+                ItemList.Open(target);
             }
         }
     }
