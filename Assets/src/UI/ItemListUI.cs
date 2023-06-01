@@ -50,10 +50,10 @@ public class ItemListUI : MonoBehaviour
                     {
                         if (itemUI == items[i])
                         {
-                            if(Input.GetMouseButtonDown(0))
-                                Debug.Log($"Left Click {container.GetItems(0,11)[i].item.displayName}");
+                            if (Input.GetMouseButtonDown(0))
+                                leftClick?.Invoke(container.GetItems(0, 11)[i].item);
                             else
-                                Debug.Log($"Right Click {container.GetItems(0,11)[i].item.displayName}");
+                                rightClick?.Invoke(container.GetItems(0, 11)[i].item);
                         }
                     }
                 }

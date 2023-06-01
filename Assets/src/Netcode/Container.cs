@@ -10,17 +10,16 @@ public class Container : IContainer
     public int Count => Items.Count;
     public event Action OnChange;
 
-    public ItemBundle[] GetItems(int start, int length)
-    {
-        throw new NotImplementedException();
-    }
 
     private List<ItemBundle> Items;
 
     public Container(int size)
     {
         this.maxSize = size;
+        Items = new List<ItemBundle>();
     }
+
+    public ItemBundle[] GetItems(int start, int length) => Items.ToArray();
 
     public (bool success, ItemBundle[] leftovers) AddItems(params ItemBundle[] itemBundles)
     {
