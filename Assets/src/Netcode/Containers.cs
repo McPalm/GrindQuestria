@@ -22,6 +22,8 @@ public class Containers : NetworkBehaviour, IInteractable
     void Awake()
     {
         Instance = this;
+        MapContainers = new Dictionary<Vector3Int, Container>();
+        Inventories = new Dictionary<GameObject, Container>();
     }
 
     void Start()
@@ -36,14 +38,16 @@ public class Containers : NetworkBehaviour, IInteractable
     {
         Debug.Log("Open");
         var ui = FindObjectOfType<StorageUI>();
-        IContainer inventory = user.GetComponent<Inventory>();
-        IContainer container = ContainerAt(info.where);
-        System.Action<ItemBundle> moveLeft = delegate (ItemBundle bundle) {
-            Debug.Log(bundle.item.displayName);
-        };
-        System.Action<ItemBundle> moveRight = delegate (ItemBundle bundle) {
-            Debug.Log(bundle.item.displayName);
-        };
+        Container inventory = InventoryOf(user);
+        Container container = ContainerAt(info.where);
+        void moveLeft(ItemBundle bundle)
+        {
+            MoveItem(bundle, container, inventory);
+        }
+        void moveRight(ItemBundle bundle)
+        {
+            MoveItem(bundle, inventory, container);
+        }
         ui.Open(inventory, container, moveRight, moveLeft);
     }
 
@@ -68,7 +72,7 @@ public class Containers : NetworkBehaviour, IInteractable
         return MapContainers[position];
     }
 
-    Container InventoryOf(GameObject character)
+    public Container InventoryOf(GameObject character)
     {
         if (Inventories.ContainsKey(character) == false)
             Inventories.Add(character, new Container(88));
@@ -79,5 +83,6 @@ public class Containers : NetworkBehaviour, IInteractable
     {
         from.RemoveItems(itemBundle);
         to.AddItems(itemBundle);
+        Debug.LogWarning("Naive as fuck.");
     }
 }

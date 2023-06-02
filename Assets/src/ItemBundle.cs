@@ -4,6 +4,12 @@ public struct ItemBundle
     public Item item;
     public int qty;
 
+    public ItemBundle(Item item, int qty)
+    {
+        this.item = item;
+        this.qty = qty;
+    }
+
     public SerializedBundle Serialized()
     {
         return new SerializedBundle()
