@@ -37,6 +37,7 @@ public class NetInput : NetworkBehaviour
         FindObjectOfType<BlueprintEditor>(includeInactive: true).NetInput = this;
         shopOpener = MyCharacter.AddComponent<ShopOpener>();
         shopOpener.StartCraft += CraftItemAtShop;
+        Containers.Instance.InventoryOf(MyCharacter).OnAdd += ItemGetPopupUI.Instance.ShowItemGet;
     }
 
     private void OnDestroy()

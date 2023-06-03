@@ -9,6 +9,7 @@ public class Container : IContainer
 
     public int Count => Items.Count;
     public event Action OnChange;
+    public event Action<ItemBundle[]> OnAdd;
 
 
     private List<ItemBundle> Items;
@@ -38,6 +39,7 @@ public class Container : IContainer
             }
         }
         OnChange?.Invoke();
+        OnAdd?.Invoke(itemBundles);
         return (true, null);
     }
 
