@@ -19,6 +19,8 @@ public class Containers : NetworkBehaviour, IInteractable
     Dictionary<GameObject, Container> Inventories;
 
     static public Containers Instance { get; private set; }
+    public NetInput Controller { get; internal set; }
+
     void Awake()
     {
         Instance = this;
@@ -36,17 +38,18 @@ public class Containers : NetworkBehaviour, IInteractable
 
     public void Interact(GameObject user, DoThing.ThingToDo info)
     {
-        Debug.Log("Open");
         var ui = FindObjectOfType<StorageUI>();
         Container inventory = InventoryOf(user);
         Container container = ContainerAt(info.where);
         void moveLeft(ItemBundle bundle)
         {
-            MoveItem(bundle, container, inventory);
+            Controller.MoveFromContainer(tilemap.WorldToCell(info.where), bundle.Serialized());
+            // MoveItem(bundle, container, inventory);
         }
         void moveRight(ItemBundle bundle)
         {
-            MoveItem(bundle, inventory, container);
+            Controller.MoveToContainer(tilemap.WorldToCell(info.where), bundle.Serialized());
+            // MoveItem(bundle, inventory, container);
         }
         ui.Open(inventory, container, moveRight, moveLeft);
     }
@@ -62,6 +65,14 @@ public class Containers : NetworkBehaviour, IInteractable
     public bool HasContainerAt(Vector3 position)
     {
         return tilemap.GetTile(position) == Crate;
+    }
+    public bool HasContainerAt(Vector3Int position) => tilemap.GetTile(position) == Crate;
+
+    public Container TryGetContainerAt(Vector3Int position)
+    {
+        if (HasContainerAt(position))
+            return ContainerAt(position);
+        return null;
     }
 
     Container ContainerAt(Vector3 position) => ContainerAt(GridManager.instance.Walls.WorldToCell(position));

@@ -38,6 +38,7 @@ public class NetInput : NetworkBehaviour
         shopOpener = MyCharacter.AddComponent<ShopOpener>();
         shopOpener.StartCraft += CraftItemAtShop;
         Containers.Instance.InventoryOf(MyCharacter).OnAdd += ItemGetPopupUI.Instance.ShowItemGet;
+        Containers.Instance.Controller = this;
     }
 
     private void OnDestroy()
@@ -68,6 +69,31 @@ public class NetInput : NetworkBehaviour
     {
         var tile = TileCollection.Instance.GetTile(tileIndex);
         GridManager.instance.Blueprint.SetTile(position, tile);
+    }
+    [Command]
+    public void MoveToContainer(Vector3Int position, ItemBundle.SerializedBundle bundle)
+    {
+        MoveItems(Containers.Instance.InventoryOf(MyCharacter), Containers.Instance.TryGetContainerAt(position), bundle, position);
+    }
+    [Command]
+    public void MoveFromContainer(Vector3Int position, ItemBundle.SerializedBundle bundle)
+    {
+        MoveItems(Containers.Instance.TryGetContainerAt(position), Containers.Instance.InventoryOf(MyCharacter), bundle, position);
+    }
+    void MoveItems(Container from, Container to, ItemBundle.SerializedBundle bundle, Vector3Int position)
+    {
+        if(from != null && to != null)
+        {
+            var distance = MyCharacter.transform.position - GridManager.instance.Walls.CellToWorld(position);
+            if(distance.sqrMagnitude < Containers.Instance.MinimumDistance * Containers.Instance.MinimumDistance)
+            {
+                Containers.Instance.MoveItem(ItemBundle.Create(bundle), from, to);
+            }
+            else
+            {
+                GameMessages.Instance.FeedbackMessage(MyCharacter, "Out of Range");
+            }
+        }
     }
 
     private class ShopOpener : MonoBehaviour
