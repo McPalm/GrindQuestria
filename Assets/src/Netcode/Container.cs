@@ -83,6 +83,14 @@ public class Container : IContainer
         return true;
     }
 
+    public int NumberOf(Item item)
+    {
+        var index = IndexOf(item);
+        if (index < 0)
+            return 0;
+        return Items[index].qty;
+    }
+
     int IndexOf(Item item)
     {
         for (int i = 0; i < Items.Count; i++)
@@ -91,5 +99,53 @@ public class Container : IContainer
                 return i;
         }
         return -1;
+    }
+
+    public ItemBundle.SerializedBundle[] Serialized()
+    {
+        Debug.LogWarning("Untested code");
+        var ret = new ItemBundle.SerializedBundle[Items.Count];
+        for (int i = 0; i < ret.Length; i++)
+        {
+            ret[i] = Items[i].Serialized();
+        }
+        return ret;
+    }
+
+    public void AdjustFromSerialized(ItemBundle.SerializedBundle[] serializedBundle)
+    {
+        Debug.LogWarning("Untested code");
+        var deserialized = new ItemBundle[serializedBundle.Length];
+        for (int i = 0; i < deserialized.Length; i++)
+        {
+            deserialized[i] = ItemBundle.Create(serializedBundle[i]);
+        }
+
+        foreach(var item in deserialized)
+        {
+            var adjust = item.qty - NumberOf(item.item);
+            if (adjust > 0)
+                AddItems(new ItemBundle(item.item, adjust));
+            else if (adjust < 0)
+                RemoveItems(new ItemBundle(item.item, adjust));
+        }
+        if (serializedBundle.Length < Items.Count)
+        {
+            // we gotta remove something
+            for (int i = Items.Count - 1; i >= 0; i--)
+            {
+                bool missing = true;
+                for (int j = 0; j < deserialized.Length; j++)
+                {
+                    if (Items[i].item == deserialized[j].item)
+                    {
+                        missing = false;
+                        continue;
+                    }
+                }
+                if (missing)
+                    Items.RemoveAt(i);
+            }
+        }
     }
 }
