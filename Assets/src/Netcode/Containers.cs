@@ -81,8 +81,7 @@ public class Containers : NetworkBehaviour, IInteractable
 
     public void MoveItem(ItemBundle itemBundle, Container from, Container to)
     {
-        from.RemoveItems(itemBundle);
-        to.AddItems(itemBundle);
-        Debug.LogWarning("Naive as fuck.");
+        (bool success, ItemBundle[] actuallyRemoved) = from.RemoveItems(itemBundle);
+        to.AddItems(actuallyRemoved);
     }
 }

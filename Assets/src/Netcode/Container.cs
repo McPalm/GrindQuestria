@@ -43,24 +43,31 @@ public class Container : IContainer
         return (true, null);
     }
 
-    public (bool success, ItemBundle[] leftovers) RemoveItems(params ItemBundle[] itemBundles)
+    public (bool success, ItemBundle[] actuallyRemoved) RemoveItems(params ItemBundle[] itemBundles)
     {
-        foreach(var bundle in itemBundles)
+        List<ItemBundle> actuallyRemoved = new List<ItemBundle>();
+        foreach (var bundle in itemBundles)
         {
             var index = IndexOf(bundle.item);
-            if(index >= 0)
+            if (index >= 0)
             {
-                Items[index] = new ItemBundle()
+                var remov = new ItemBundle()
                 {
                     item = bundle.item,
-                    qty = Items[index].qty - bundle.qty,
+                    qty = Items[index].qty < bundle.qty ? Items[index].qty : bundle.qty // lowest value of request and held
                 };
+                Items[index] = new ItemBundle()
+                {
+                    item = Items[index].item,
+                    qty = Items[index].qty - remov.qty,
+                };
+                actuallyRemoved.Add(remov);
+                if (Items[index].qty <= 0)
+                    Items.RemoveAt(index);
             }
-            if (Items[index].qty <= 0)
-                Items.RemoveAt(index);
         }
         OnChange?.Invoke();
-        return (true, null);
+        return (true, actuallyRemoved.ToArray());
     }
 
     public bool HasItems(params ItemBundle[] itemBundles)
