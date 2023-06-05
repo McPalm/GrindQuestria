@@ -9,7 +9,6 @@ public class Movement : NetworkBehaviour
     public float runSpeed = 3f;
     Vector2 direction;
     Vector3 position;
-    bool updatePosition = false;
     double lastUpdate;
     public Vector2 Direction
     {
@@ -44,7 +43,6 @@ public class Movement : NetworkBehaviour
         {
             lastUpdate = time;
             this.position = Vector3.Lerp(position, this.position, .2f);
-            updatePosition = true;
             this.direction = direction;
         }
     }
